@@ -1,0 +1,177 @@
+{% extends 'nav.html' %}
+
+
+{% block title %}
+	User Address
+{% endblock title %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'address.css' %}">
+<div class="page-content">
+    <div class="dashboard">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-10  mt-4 mt-lg-0">
+                    <div class="tab-content">
+                        <div class="tab-pane show active" id="tab-address" role="tabpanel"
+                            aria-labelledby="tab-address-link">
+                            <div class="col-md-12">
+                                <div class="accordion accordion-icon" id="accordion-3">
+                                    <div class="card">
+                                        <div class="card-header" id="heading3-1">
+                                            <h2 class="card-header">
+                                                <a class="collapsed btn btn-warning" role="button" data-toggle="collapse"
+                                                    href="#collapse3-1" aria-expanded="false"
+                                                    aria-controls="collapse3-1">
+                                                    <i class="icon-add-o"></i>{% if check %}
+                                                    <span>Update Address</span>
+                                                    {% else %}
+                                                    <span>Add Address</span>
+                                                    {% endif %}
+                                                </a>
+                                            </h2>
+                                        </div><!-- End .card-header -->
+                                        <div id="collapse3-1" class="collapse {% if check %}
+                                        show
+                                        {% endif %}" aria-labelledby="heading3-1" data-parent="#accordion-3">
+                                            <div class="card-body">
+                                                <form action="" method="POST" id="address-form">
+                                                    {% csrf_token %}
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <label>First Name *</label>
+                                                            {{form.first_name}}
+                                                        </div><!-- End .col-sm-6 -->
+
+                                                        <div class="col-sm-6">
+                                                            <label>Last Name *</label>
+                                                            {{form.last_name}}
+                                                        </div><!-- End .col-sm-6 -->
+                                                        <div class="col-sm-6">
+                                                            <label>Phone*</label>
+                                                            {{form.phone}}
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Email*</label>
+                                                            {{form.email}}
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <label>Address 1*</label>
+                                                            {{form.address1}}
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <label>Address 2*</label>
+                                                            {{form.address2}}
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label>City *</label>
+                                                            {{form.city}}
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label>State *</label>
+                                                            {{form.state}}
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label>Country *</label>
+                                                            {{form.country}}
+                                                        </div>
+                                                        <div class="col-sm-8">
+                                                            <label>Pin Code *</label>
+                                                            {{form.pincode}}
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label>Address Type *</label>
+                                                            {{form.add_type}}
+                                                        </div>
+                                                    </div><!-- End .row -->
+
+
+
+                                                    <button type="submit" class="btn btn-outline-warning">
+                                                        {% if check %}
+                                                        <span>Update Address</span>
+                                                        {% else %}
+                                                        <span>Add Address</span>
+                                                        {% endif %}
+                                                        <i class="icon-long-arrow-right"></i>
+                                                    </button>
+                                                </form>
+                                            </div><!-- End .card-body -->
+                                        </div><!-- End .collapse -->
+                                    </div><!-- End .card -->
+
+
+                                </div><!-- End .accordion -->
+                                <!-- End .col-md-6 -->
+                                <p id="checking" >The following addresses can be used on the checkout page by default.</p>
+                                {% if check %}
+                                {% else %}
+                                <div class="row ">
+
+                                    {% for x in address %}
+                                    <div class="col-sm-6">
+
+                                        <div class="card card-dashboard">
+
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <span><b><u>{{x.first_name}} {{x.last_name}}</u></b></span>
+                                                        <div class="col-md-12">
+                                                            <span>{{x.address1}} ,</span>
+                                                            <span>{{x.address2}}</span>
+                                                            <span>{{x.city}}, {{x.state}}, {{x.country}}</span>
+                                                            <p>Pin : {{x.pincode}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 d-flex flex-column justify-content-between">
+                                                        <div class="d-flex justify-content-between">
+                                                            <p class="mb-1 text-primary"><b>{{x.add_type}}</b></p>
+
+                                                            <p>{{x.phone}}</p>
+                                                        </div>
+                                                        <div class="btn-group">
+                                                            <button type="button"
+                                                                class="btn btn-primary dropdown-toggle"
+                                                                data-toggle="dropdown" aria-haspopup="true"
+                                                                aria-expanded="false">
+                                                                Action
+                                                            </button>
+                                                            <div class="dropdown-menu">
+                                                                <a class="dropdown-item" onclick="confirmAddress(event)"
+                                                                    href=""
+                                                                    title="edit">Edit</a>
+                                                                <a class="dropdown-item" onclick='confirmAddress(event)'
+                                                                    href=""
+                                                                    title="delete">Delete</a>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div><!-- End .card-body -->
+
+
+
+                                        </div>
+                                    </div><!-- End .col-lg-6 -->
+                                    {% endfor %}
+
+                                </div><!-- End .row -->
+                                {% endif %}
+                            </div><!-- .End .tab-pane -->
+
+                        </div>
+                    </div><!-- End .col-lg-9 -->
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+        </div><!-- End .dashboard -->
+    </div><!-- End .page-content -->
+</div>
+<script src="/static/assets/js/script.js"></script>
+{% endblock content %}
+    

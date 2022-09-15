@@ -1,0 +1,331 @@
+{% extends 'index.html' %}
+
+{% block content  %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'signup.css' %}">
+
+
+<div class="upper">
+    <div class="logo">
+        <a href="#">
+            <img src="../static/img/logo2.svg" class="img-logo"/>
+        </a>
+    </div>
+    
+    <div class="login-div">
+        <form class="login" method="POST" id="registration_form" >
+            <div class="signin-button-one">
+                <a href="{% url 'signup_user_phone' %}" >Signup with Phone Number
+                    
+                </a>
+            </div>
+            <br>
+            {% csrf_token %}
+            
+            <h1>Sign Up</h1>
+            <div class="input-text">
+                {{form.first_name.label}}
+                <input type="text"  id="first_name" name="first_name" placeholder="Enter First Name" />
+                <div class="warning-input" id="fname_error_message">
+                    Please enter a Your first name.
+                    
+                </div>
+            </div>
+
+
+            <div class="input-text">
+                {{form.last_name.label}}
+                <input type="text" id="last_name" name="last_name" placeholder="Enter Last Name" />
+                
+                <div class="warning-input" id="sname_error_message">
+                    Please enter a Your last name.
+                    
+                </div>
+            </div>
+
+            <div class="input-text">
+                {{form.mobile.label}}
+                <input type="text" id="mobile" name="mobile" placeholder="Enter Phone Number" />
+                
+                <div class="warning-input" id="mobile_error_message">
+                    Please enter a valid email or phone number.
+                    
+                </div>
+            </div>
+           
+            
+            <div class="input-text">
+                {{form.email.label}}
+                <input type="text" id="inputEmail" name="email" placeholder="Email" />
+                
+                <div class="warning-input" id="email_error_message">
+                    Please enter a valid email or phone number.
+                    
+                </div>
+            </div>
+
+            <div class="input-text">
+                {{form.password.label}}
+                <input type="password"  id="inputPassword" name="password" placeholder="Enter Password" />
+                
+                <div class="warning-input" id="password_error_message">
+                    Please enter a valid email or phone number.
+                    
+                </div>
+            </div>
+
+            <div class="input-text">
+                {{form.confirm_password.label}}
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your Password" />
+                
+                <div class="warning-input" id="retype_password_error_message">
+                    Please conform your password
+                    
+                </div>
+                
+            </div>
+            
+            {% if messages %}
+            <div class="alert alert-danger w-40 mx-auto" role="alert">
+              
+            <div class="messages">
+                {% for message in messages %}
+                 <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>        
+                 {{ message }}
+            </div>
+                {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            <div>
+                <input type="submit"  class="signin-button" value="submit"/>
+            </div>
+            
+            <div class="remember-flex">
+                <div class="help">
+                    <a class="color_text" href="#">Forgot Password</a>
+                </div>
+            </div>
+            <div class="new-members">
+                Already have a account? <a href="{% url 'home_user'  %}" class="signup-link">Sign In now</a>.
+            </div>
+        </form>
+    </div>
+</div>
+<div class="bottom">
+    <div class="bottom-width">
+        Questions? Call <a href="tel:1-844-542-4813" class="tel-link">+918848364263</a>
+        <div>
+            <ul class="bottom-flex">
+                <li class="list-bottom">
+                    <a href="#" class="link-bottom">
+                        FAQ
+                    </a>
+                </li>
+                <li class="list-bottom">
+                    <a href="#" class="link-bottom">
+                        Help Center
+                    </a>
+                </li>
+                <li class="list-bottom">
+                    <a href="#" class="link-bottom">
+                        Terms of Use
+                    </a>
+                </li>
+                <li class="list-bottom">
+                    <a href="#" class="link-bottom">
+                        Privacy
+                    </a>
+                </li>
+                <li class="list-bottom">
+                    <a href="#" class="link-bottom">
+                        Cookie Preferences
+                    </a>
+                </li>
+                <li class="list-bottom">
+                    <a href="#" class="link-bottom">
+                        Corporate information
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" ></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+
+<script type="text/javascript">
+
+    $("registration_form"). submit(function(e){
+    e. preventDefault();
+    });
+
+    
+    $(function() {
+
+       $("#fname_error_message").hide();
+       $("#sname_error_message").hide();
+       $("#email_error_message").hide();
+       $("#mobile_error_message").hide();
+       $("#password_error_message").hide();
+       $("#retype_password_error_message").hide();
+
+
+       var error_fname = false;
+       var error_sname = false;
+       var error_email = false;
+       var error_mobile = false;
+       var error_password = false;
+       var error_retype_password = false;
+
+       $("#first_name").focusout(function(){
+          check_fname();
+       });
+       $("#last_name").focusout(function() {
+          check_sname();
+       });
+       $("#inputEmail").focusout(function() {
+          check_email();
+       });
+       $("#mobile").focusout(function() {
+          check_mobile();
+       });
+       $("#inputPassword").focusout(function() {
+          check_password();
+       });
+       $("#confirm_password").focusout(function() {
+          check_retype_password();
+       });
+
+
+       
+
+       function check_fname() {
+          var pattern = /^[a-zA-Z]*$/;
+          var fname = $("#first_name").val();
+          if (pattern.test(fname) && fname !== '') {
+             $("#fname_error_message").hide();
+             $("#first_name").css("border-bottom","2px solid #34F458");
+          } else {
+             $("#fname_error_message").html("Please enter a Your first name.");
+             $("#fname_error_message").show();
+             $("#first_name").css("border-bottom","2px solid #F90A0A");
+             error_fname = true;
+          }
+       }
+
+       function check_mobile() {
+          var pattern = /^[0-9]*$/;
+          var mobile = $("#mobile").val();
+          if (pattern.test(mobile) && mobile !== '') {
+             $("#mobile_error_message").hide();
+             $("#mobile").css("border-bottom","2px solid #34F458");
+          } else if(mobile == ''){
+            $("#mobile_error_message").html("Please enter your phone number.");
+             $("#mobile_error_message").show();
+             $("#mobile").css("border-bottom","2px solid #F90A0A");
+          }else {
+             $("#mobile_error_message").html("Please enter a valid phone number.");
+             $("#mobile_error_message").show();
+             $("#mobile").css("border-bottom","2px solid #F90A0A");
+             error_mobile = true;
+          }
+       }
+
+       function check_sname() {
+          var pattern = /^[a-zA-Z]*$/;
+          var sname = $("#last_name").val()
+          if (pattern.test(sname) && sname !== '') {
+             $("#sname_error_message").hide();
+             $("#last_name").css("border-bottom","2px solid #34F458");
+          } else {
+             $("#sname_error_message").html("Please enter a Your last name.");
+             $("#sname_error_message").show();
+             $("#last_name").css("border-bottom","2px solid #F90A0A");
+             error_fname = true;
+          }
+       }
+
+       
+
+       function check_password() {
+          var password_length = $("#inputPassword").val().length;
+          if (password_length < 8) {
+             $("#password_error_message").html("Atleast 8 Characters");
+             $("#password_error_message").show();
+             $("#inputPassword").css("border-bottom","2px solid #F90A0A");
+             error_password = true;
+          } else {
+             $("#password_error_message").hide();
+             $("#inputPassword").css("border-bottom","2px solid #34F458");
+          }
+       }
+
+       function check_retype_password() {
+          var password = $("#inputPassword").val();
+          var retype_password = $("#confirm_password").val();
+          if (password !== retype_password) {
+             $("#retype_password_error_message").html("Passwords Did not Matched");
+             $("#retype_password_error_message").show();
+             $("#confirm_password").css("border-bottom","2px solid #F90A0A");
+             error_retype_password = true;
+          }else if(retype_password == ''){
+            $("#retype_password_error_message").html("Please confirm your password");
+             $("#retype_password_error_message").show();
+             $("#confirm_password").css("border-bottom","2px solid #F90A0A");
+          }
+          else {
+             $("#retype_password_error_message").hide();
+             $("#confirm_password").css("border-bottom","2px solid #34F458");
+          }
+       }
+
+       function check_email() {
+          var pattern = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+          var email = $("#inputEmail").val();
+          if (pattern.test(email) && email !== '') {
+             $("#email_error_message").hide();
+             $("#inputEmail").css("border-bottom","2px solid #34F458");
+          } else if(email == ''){
+             $("#email_error_message").html("Please enter your email address");
+             $("#email_error_message").show();
+             $("#inputEmail").css("border-bottom","2px solid #F90A0A");
+          }
+          else {
+             $("#email_error_message").html("Please enter a valid email address");
+             $("#email_error_message").show();
+             $("#inputEmail").css("border-bottom","2px solid #F90A0A");
+             error_email = true;
+          }
+       }
+
+       $("#registration_form").submit(function() {
+          error_fname = false;
+          error_sname = false;
+          error_email = false;
+          error_password = false;
+          error_retype_password = false;
+
+          check_fname();
+          check_sname();
+          check_email();
+          check_mobile();
+          check_password();
+          check_retype_password();
+
+          if (error_fname === false && error_sname === false && error_email === false && error_password === false && error_retype_password === false) {
+             
+             return true;
+          } else {
+             alert("Please Fill the form Correctly");
+             return false;
+          }
+
+
+       });
+    });
+ </script>
+{% endblock %}

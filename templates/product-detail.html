@@ -1,0 +1,551 @@
+{% extends 'index.html' %}
+    <!-- font awesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- material icons cdn -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- owl carousel cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- custom build css -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+{% block content %}
+<!-- header starts -->
+<header class="bg-primary-blue fixed top-0 py-2.5 w-full z-10">
+
+    <!-- navbar container -->
+    <div class="w-full sm:w-9/12 px-4 m-auto flex justify-between items-center relative">
+
+        <!-- logo & search container -->
+        <div class="flex items-center flex-1">
+        <a class="h-7 mr-4" href="/Flipkart/public/index.html">
+            <img class="h-full w-full object-contain" src="/static/assets/images/entrega-logo.png" alt="">
+        </a>
+
+        <!-- search container -->
+        
+        <!-- search container -->
+        </div>
+        <!-- logo & search container -->
+
+        <!-- right navs -->
+        <div class="flex items-center justify-between gap-7 relative">
+            <span class="userDropDown flex items-center text-white font-medium gap-1 cursor-pointer">Jhon
+                <span class="material-icons text-sm transition-transform duration-100">expand_more</span>
+            </span>
+
+           <!-- dropdown navbar hover tabs -->
+           <div class="userDropDownMenu hidden absolute w-60 -left-24 ml-2 top-9 bg-white shadow-2xl rounded flex-col text-sm">
+               <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50 rounded-t" href="profile.html">
+                    <span class="material-icons md-18 text-primary-blue">account_circle</span>
+                    My Profile
+               </a>
+               <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="#">
+                    <span class="material-icons md-18 text-primary-blue">offline_bolt</span>
+                    Supercoin Zone
+               </a>
+               <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="https://www.flipkart.com/plus/all-offers">
+                    <span class="material-icons md-18 text-primary-blue">add_circle</span>
+                    Flipkart Plus Zone
+               </a>
+               <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="orders.html">
+                    <span class="material-icons md-18 text-primary-blue">shopping_bag</span>
+                    Orders
+               </a>
+               <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="wishlist.html">
+                    <span class="material-icons md-18 text-primary-blue">favorite</span>
+                    Wishlist
+               </a>
+               <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="#">
+                    <span class="material-icons md-18 text-primary-blue">chat</span>
+                    My Chats
+               </a>
+               <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="https://www.flipkart.com/account/rewards">
+                    <span class="material-icons md-18 text-primary-blue">redeem</span>
+                    Coupons
+               </a>
+               <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="#">
+                    <span class="material-icons md-18 text-primary-blue">account_balance_wallet</span>
+                    Gift Cards
+               </a>
+               <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="#">
+                    <span class="material-icons md-18 text-primary-blue">notifications</span>
+                    Notifications
+               </a>
+               <a class="pl-3 py-3.5 flex gap-3 items-center hover:bg-gray-50 rounded-b" href="#">
+                    <span class="material-icons md-18 text-primary-blue">power_settings_new</span>
+                    Logout
+               </a>
+               <div class="absolute right-1/2 -top-2.5">
+                    <div class="arrow_down"></div>
+               </div>
+           </div>
+           <!-- dropdown navbar hover tabs -->
+
+            <span class="moreDropDown hidden sm:flex items-center text-white font-medium gap-1 cursor-pointer">More
+                <span class="material-icons text-sm transition-transform duration-100">expand_more</span>
+            </span>
+
+            <!-- dropdown navbar hover tabs -->
+            <div class="moreDropDownMenu hidden absolute w-60 -right-2 top-9 bg-white shadow-2xl rounded flex-col text-sm">
+            <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50 rounded-t" href="https://www.flipkart.com/communication-preferences/push">
+                 <span class="material-icons md-18 text-primary-blue">notifications</span>
+                 Notification Preferences
+            </a>
+            <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="https://seller.flipkart.com/sell-online">
+                 <span class="material-icons md-18 text-primary-blue">business_center</span>
+                 Sell on Flipkart
+            </a>
+            <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="https://www.flipkart.com/helpcentre">
+                 <span class="material-icons md-18 text-primary-blue">live_help</span>
+                 24x7 Customer Care
+            </a>
+            <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="https://advertising.flipkart.com">
+                 <span class="material-icons md-18 text-primary-blue">trending_up</span>
+                 Advertise
+            </a>
+            <a class="pl-3 py-3.5 flex gap-3 items-center hover:bg-gray-50 rounded-b" href="https://www.flipkart.com/mobile-apps">
+                 <span class="material-icons md-18 text-primary-blue">download</span>
+                 Download App
+            </a>
+            <div class="absolute right-1/2 -top-2.5">
+                 <div class="arrow_down"></div>
+            </div>
+            </div>
+            <!-- dropdown navbar hover tabs -->
+
+            <a href="{% url 'cart' %}" class="flex items-center text-white font-medium gap-2 relative">
+                <span class="material-icons">shopping_cart</span>
+                <!-- badge count -->
+                <div class="w-5 h-5 p-2 bg-red-500 text-xs rounded-full absolute -top-2 left-3 flex justify-center items-center border">
+                    {{cart_count}}
+                </div>
+                <!-- badge count -->
+                Cart
+            </a>
+        </div>
+        <!-- right navs -->
+
+    </div>
+    <!-- navbar container -->
+</header>
+<!-- header ends -->
+
+
+    <!-- categories container header -->
+    <section class="hidden sm:block bg-white w-full px-2 sm:px-12 shadow overflow-hidden border-b mt-14">
+
+        <!-- categories container -->
+        
+    </section>
+    <!-- categories container header -->
+
+    <!-- main sections starts -->
+    <main class="mt-12 sm:mt-0">
+    
+    <!-- product image & description container -->
+    <div class="w-full flex flex-col sm:flex-row bg-white sm:p-2 relative">
+
+        <!-- image wrapper -->
+        <div class="w-full sm:w-2/5 sm:sticky top-16 sm:h-screen">
+            <!-- imgbox -->
+            <div class="flex flex-col gap-3 m-3">
+                <div class="image-box w-full h-96 p-4 border">
+                    <img class="w-full h-full object-contain" src="{{single_product.pro_image1.url}}" alt="">
+                </div>
+
+                <div class="w-full flex gap-3 product_data">
+                    {% csrf_token %}
+                    <!-- add to cart btn -->
+                    <input type="hidden" name="" value="1" id="productqty">
+                    <input type="hidden" name="" id="product_id" value="{{single_product.id}}" id="">
+                    <input type="hidden" name="" id="product_name" value="{{single_product.product_name}}" id="">
+
+                    {% if single_product.stock <= 0 %}
+                    <button href=""  class="p-4 w-1/2 flex items-center justify-center gap-2 text-white bg-primary-yellow rounded-sm shadow disabled" >
+                        <span class="material-icons">shopping_cart</span>
+                        Out of Stock
+                    </button>
+                    {% else %}
+                    <a href="{% url 'add-cart' single_product.id %}"  class="p-4 w-1/2 flex items-center justify-center gap-2 text-white bg-primary-yellow rounded-sm shadow" >
+                        <span class="material-icons">shopping_cart</span>
+                        ADD TO CART
+                    </a>
+                    {% endif %}
+                    
+                    
+                    <!-- add to cart btn -->
+                </div>
+
+            </div>
+            <!-- imgbox -->
+        </div>
+        <!-- image wrapper -->
+
+        <!-- product desc wrapper -->
+        <div class="flex-1 py-2 px-3">
+
+        <!-- whole product description -->
+        <div class="flex flex-col gap-2 mb-4">
+
+            <h2 class="header-name">{{single_product.product_name}}</h2>
+            <!-- rating badge -->
+            <span class="text-sm text-gray-500 font-medium flex gap-2 items-center">
+                <span class="text-xs px-1.5 py-0.5 bg-primary-green rounded-sm text-white flex items-center gap-0.5">4.3 <i class="material-icons md-12">star</i></span>
+                <span>3,04,177 Ratings & 42,233 Reviews</span>
+            </span>
+            <!-- rating badge -->
+
+            <!-- price desc -->
+            <span class="text-primary-green text-sm font-medium">Price</span>
+            <div class="flex items-baseline gap-2 text-2xl font-medium">
+                <span id="productprice">₹ {{single_product.price}}</span>
+            </div>
+            <!-- price desc -->
+
+            
+
+            <!-- warranty & brand -->
+            
+            <!-- warranty & brand -->
+
+            <!-- delivery details -->
+            
+            <!-- delivery details -->
+
+            <!-- color selection -->
+            <div class="flex gap-20 mt-4 items-stretch text-sm font-medium">
+                {% if single_product.pro_image2  %}
+                <p class="text-gray-500">Photos</p>
+                {% endif %}
+                <ul class="flex gap-3">
+                    {% if single_product.pro_image2   %}
+                    <li class="w-14 h-14 border cursor-pointer"><img class="w-full h-full object-contain" src="{{single_product.pro_image2.url}}" alt=""></li>
+                    {% endif %}
+                    {% if single_product.pro_image3   %}
+                    <li class="w-14 h-14 border cursor-pointer"><img class="w-full h-full object-contain" src="{{single_product.pro_image3.url}}" alt=""></li>
+                    {% endif %}
+                    {% if single_product.pro_image4   %}
+                    <li class="w-14 h-14 border cursor-pointer"><img class="w-full h-full object-contain" src="{{single_product.pro_image4.url}}" alt=""></li>
+                    {% endif %}
+                    {% if single_product.pro_image5   %}
+                    <li class="w-14 h-14 border cursor-pointer"><img class="w-full h-full object-contain" src="{{single_product.pro_image5.url}}" alt=""></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <!-- color selection -->
+
+
+            <!-- highlights & services details -->
+            <div class="flex flex-col sm:flex-row justify-between">
+            <!-- highlights details -->
+            <div class="flex gap-16 mt-4 items-stretch text-sm">
+                <p class="text-gray-500 font-medium">Discription</p>
+                
+                <ul class="list-disc flex flex-col gap-2 w-64">
+                    <li>
+                        {{single_product.product_discription}}
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- highlights details -->
+            
+            <!-- services details -->
+            
+            <!-- services details -->
+            </div>
+            <!-- highlights & services details -->
+            
+            <!-- seller details -->
+            <div class="flex gap-16 mt-4 mr-6 items-stretch text-sm">
+                <p class="text-gray-500 font-medium">Services</p>
+                <ul class="flex flex-col gap-2">
+                    <li>
+                        <p class="flex items-center gap-3"><span class="material-icons md-18 text-primary-blue">verified_user</span> 1 Year</p>
+                    </li>
+                    <li>
+                        <p class="flex items-center gap-3"><span class="material-icons md-18 text-primary-blue">cached</span> 7 Days Replacement Policy</p>
+                    </li>
+                    <li>
+                        <p class="flex items-center gap-3"><span class="material-icons md-18 text-primary-blue">paid</span> Cash on Delivery available</p>
+                    </li>
+                </ul>
+            </div>
+            <!-- seller details -->
+
+            <!-- flipkart plus banner -->
+            
+            <!-- flipkart plus banner -->
+
+            <!-- description details -->
+            
+            <!-- description details -->
+
+    
+            <!-- border box -->
+            <div class="w-full mt-6 rounded-sm border flex flex-col">
+                <h1 class="px-6 py-4 border-b text-2xl font-medium">Product Description</h1>
+
+                <!-- info rows -->
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-7 p-6 items-stretch border-b">
+                    {% if single_product.pro_image2 %}
+                    <img class="h-40 sm:h-24 w-full sm:w-44 object-contain" src="{{single_product.pro_image2.url}}" alt="">
+                    {% endif %}
+                    <div class="flex flex-col gap-2">
+                        <p class="text-sm">{{single_product.product_discription1}}</p>
+                    </div>
+                </div>
+
+                {% if single_product.product_discription2 %}
+                <div class="flex flex-col gap-2 sm:gap-7 sm:flex-row-reverse p-6 items-stretch">
+                    {% if single_product.pro_image2 %}
+                    <img class="h-40 sm:h-24 w-full sm:w-44 object-contain" src="{{single_product.pro_image3.url}}" alt="">
+                    {% endif %}
+                    <div class="flex flex-col gap-2">
+                        <p class="text-sm">{{single_product.product_discription2}}</p>
+                    </div>
+                </div>
+                {%endif%}
+                <!-- info rows -->
+            </div>
+            <!-- border box -->
+
+            <!-- specifications border box -->
+            <div class="w-full mt-4 pb-4 rounded-sm border flex flex-col">
+                <h1 class="px-6 py-4 border-b text-2xl font-medium">Specifications</h1>
+                <h1 class="px-6 py-3 text-lg">General</h1>
+
+                <!-- specs list -->
+                {% if single_product.product_highlights %}
+                <div class="px-6 py-2 flex items-center text-sm">
+                    <p class="flex-1">{{single_product.product_highlights}}</p>
+                </div>
+                {% endif %}
+                {% if single_product.product_highlights1 %}
+                <div class="px-6 py-2 flex items-center text-sm">
+                    <p class="flex-1">{{single_product.product_highlights1}}</p>
+                </div>
+                {% endif %}
+                {% if single_product.product_highlights3 %}
+                <div class="px-6 py-2 flex items-center text-sm">
+                    <p class="flex-1">{{single_product.product_highlights3}}</p>
+                </div>
+                {% endif %}
+                {% if single_product.product_highlights2 %}
+                <div class="px-6 py-2 flex items-center text-sm">
+                    <p class="flex-1">{{single_product.product_highlights2}}</p>
+                </div>
+                {% endif %}
+                {% if single_product.product_highlights4 %}
+                <div class="px-6 py-2 flex items-center text-sm">
+                    <p class="flex-1">{{single_product.product_highlights4}}</p>
+                </div>
+                {% endif %}
+                <!-- specs list -->
+
+            </div>
+            <!-- specifications border box -->
+
+            <!-- specifications border box -->
+            <div class="w-full mt-4 pb-4 rounded-sm border flex flex-col">
+                <h1 class="px-6 py-4 border-b text-2xl font-medium">Review and Rating</h1>
+
+
+                <!-- specs list -->
+                <form action="{% url 'submit-review' single_product.id %}" method="POST">
+
+                    {% csrf_token %}
+                    <h5> <u> Write your review</u></h5>
+
+                    <div>
+                        <!-- Rating stars -->
+                        <label for="">How do you rate this product?</label>
+                        <br>
+
+                        <div class="rate">
+                            <input type="radio" name="rating" value="5" id="rating10"><label for="rating10" title="5" ></label>
+                            <input type="radio" name="rating" value="4.5" id="rating9"><label for="rating9" title="4.5" class="half" ></label>
+                            <input type="radio" name="rating" value="4" id="rating8"><label for="rating8" title="4" ></label>
+                            <input type="radio" name="rating" value="3.5" id="rating7"><label for="rating7" title="3.5"class="half" ></label>
+                            <input type="radio" name="rating" value="3" id="rating6"><label for="rating6" title="3" ></label>
+                            <input type="radio" name="rating" value="2.5" id="rating4.5"><label for="rating5" title="2.5" class="half" ></label>
+                            <input type="radio" name="rating" value="2" id="rating4"><label for="rating4" title="2" ></label>
+                            <input type="radio" name="rating" value="1.5" id="rating3"><label for="rating3" title="1.5"class="half" ></label>
+                            <input type="radio" name="rating" value="1" id="rating2"><label for="rating2" title="1" ></label>
+                            <input type="radio" name="rating" value="0.5" id="rating1"><label for="rating1" title="0.55" class="half" ></label>
+
+                        </div>
+                        <br>
+
+                        <label for="">Review Title:</label>
+                        <input type="text" name="subject" id="" class="form-control">
+                        <br>
+                        <label for="">Review</label>
+                        <textarea name="review" id="" class="form-control" rows="4"></textarea>
+                        <br>
+                        {% if user.is_authenticated %}
+                        <input type="submit" name="" class="btn btn-light text-dark" value="Submit" id="">
+                        {% else %}
+                        
+                        <p>You much be logged in to post a review . <span><a href="{% url 'login' %}" >Login Now</a></span></p>
+
+                        {% endif %}
+
+
+                        {% if messages %}
+                        <div class="alert alert-success w-40 mx-auto" role="alert">
+                        
+                        <div class="messages">
+                        {% for message in messages %}
+                        <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>        
+                        {{ message }}
+                         </div>
+                        {% endfor %}
+                        </div>
+                        </div>
+                        {% endif %}
+
+                    </div>
+
+                </form>
+                <!-- specs list -->
+
+            </div>
+            <!-- specifications border box -->
+            
+        </div>
+
+        </div>
+        <!-- product desc wrapper -->
+
+    </div>
+    <!-- product image & description container -->
+
+    <div class="flex flex-col gap-3 px-2 mt-6">
+    <!-- you may like section -->
+    
+    <!-- you may like section -->
+
+    <!-- top rated section -->
+    <section id="topSelection" class="bg-white w-full shadow overflow-hidden">
+        <!-- header -->
+        <div class="flex px-6 py-3 justify-between items-center">
+            <h1 class="text-xl font-medium">Top Rated</h1>
+            <a href="{% url 'store' %}" class="bg-primary-blue text-xs font-medium text-white px-5 py-2.5 rounded-sm shadow-lg">VIEW ALL</a>
+        </div>
+        <hr>
+        <!-- header -->
+        
+        <!-- products container -->
+        <div class="flex items-center justify-between owl-carousel owl-theme relative">
+
+            {% for product in products %}
+            <!-- one product -->
+            <a class="flex flex-col items-center gap-2 p-6" href="{{ products.get_url }}">
+                <div class="w-36 h-36 transform hover:scale-110 transition-transform duration-100 ease-out">
+                    <img class="w-full h-full object-contain" src="{{product.pro_image1.url}}" alt="">
+                </div>
+                <h2 class="font-medium text-sm mt-2">{{product.product_name_card}}</h2>
+                <span class="text-primary-green text-sm"></span>
+            </a>
+
+            {% endfor %}
+            
+
+        </div>
+        <!-- products container -->
+    </section>
+    <!-- top rated section -->
+    </div>
+
+    </main>
+    <!-- main sections starts -->
+
+
+    
+
+
+    <!-- footer starts -->
+    <footer class="w-full py-1 sm:py-4 px-4 sm:px-12 bg-primary-darkBlue text-white text-xs border-b border-gray-600 flex flex-col sm:flex-row overflow-hidden">
+        <div class="w-full sm:w-7/12 flex flex-col sm:flex-row">
+        <!-- about column -->
+        
+        <!-- about column -->
+
+        <!-- help column -->
+        
+        <!-- help column -->
+
+        <!-- policy column -->
+        
+        <!-- policy column -->
+
+        <!-- socials column -->
+        <!-- socials column -->
+        </div>
+
+
+        <div class="border-gray-600 h-36 w-1 border-l mr-5 mt-6 hidden sm:block"></div>
+        
+
+    </footer>
+    <!-- footer ends -->
+
+    <!-- copyright cards footer -->
+    
+    <!-- copyright cards footer -->
+
+    <!-- jquery cdn -->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+    integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+    
+
+    <!-- owl carousel cdn -->
+
+    <!-- js-image-zoom cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/js-image-zoom/js-image-zoom.min.js"></script>
+
+    <!-- custom js -->
+    <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+    <script src="path/from/html/page/to/jquery.min.js"></script>
+    <script src="/static/product.js"></script>
+    
+
+    <script>
+        $('#addtoCartBtn').click(function (e) {
+    e.preventDefault();
+
+    var product_id = $(this).closest('.product_data').find('#product_id').val();
+    var product_qty = $(this).closest('.product_data').find('#productqty').val();
+    var token = $('input[name=csrfmiddlewaretoken]').val();
+
+    $.ajax({
+        method : 'POST',
+        url : '/add-to-cart',
+        data : {
+            'product_id' : product_id,
+            'quantity' : product_qty,
+            csrfmiddlewaretoken : token
+        },
+        dataType : 'dataType',
+        success : function(response) {
+
+        }
+    })
+
+})
+    </script>
+{% endblock %}
+
+

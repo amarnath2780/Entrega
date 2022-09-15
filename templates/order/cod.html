@@ -1,0 +1,58 @@
+{% extends 'index.html' %} {% block title %}Payment{% endblock title %}
+{% block content %}
+
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'cod.css' %}">
+
+<div class="container mt-4 pt-5 cod-box bg-white">
+    <div class="text-success text-center">
+        <h3><b> Your Order Is Successfully Created </b></h3>
+        <h5>we will deliver within 5 days </h5>
+    </div>
+    <div class="row d-flex my-5 justify-content-center">
+        <div class="col-8">
+            <h6 class="ps-2 py-5"> <b> Order Number : {{order_number}}</b></h6>
+            <table class="table pb-5">
+                <thead>
+                    <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col">quantity</th>
+                        <th scope="col">price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in ordered_products %}
+                    <tr>
+                        <td>{{item.product.product_name}}</td>
+                        <td class="text-center">{{item.quantity}}</td>
+                        <td class="text-center">${{item.product_price}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class=" d-flex">
+                <div class="col row align-items-end">
+                    <table class="d-grid py-5">
+                        <tr>
+                            <td><b>tax amount :</b> </td>
+                            <td>₹ {{tax_amount}} </td>
+                        </tr>
+                        <tr>
+                            <td><b>Total Amount :</b> </td>
+                            <td><b>₹ {{sub_total}}</b></td>
+                        </tr>
+                    </table>
+                    <div class="d-flex justify-content-end pb-5">
+                        <a href="{% url 'order-list' %}" class="btn btn-sm btn-warning">view in orders</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    swal("Tank You For ordering with us!", "we will deliver as soon as possible!", "success");
+</script>
+{% endblock %}

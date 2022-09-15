@@ -1,0 +1,394 @@
+{%  extends 'nav.html' %}
+
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'place-order.css' %}">
+
+<section class="section-content padding-y bg" id="payment-banner">
+  <div class="container" id="payment-row">
+    <!-- ============================ COMPONENT 1 ================================= -->
+
+    <h4 class="text-center mb-10">Review Your Order And Make Payment</h4>
+    <div class="row mt-5 card-details shadow-lg p-3 mb-5 bg-white rounded">
+      <aside class="col-lg-8" >
+        <div class="card" id="card-box">
+            <h5 class="card-header">Billing Address</h5>
+            <div class="card-body">
+              <p class="card-text mb-0">{{order.full_name}}</p>
+              <p class="card-text mb-0">{{order.full_address}}</p>
+              <p class="card-text mb-0">{{order.city}},{{order.state}}</p>
+              <p class="card-text mb-0">{{order.country}}</p>
+              <p class="card-text mb-0">{{order.email}}</p>
+              <p class="card-text mb-0">{{order.phone}}</p>
+              {% if order.order_note %}
+                <b>Order Note :</b> {{order.order_note}}
+              {% endif %}
+            </div>
+        </div>
+        <div class="card" id="card-box">
+            <h5 class="card-header">Payment Method</h5>
+            <div class="card-body">
+              <p class="card-text">
+
+                {% if payment_type == 'Razorpay' %}
+                Razorpay
+                {% elif payment_type == 'cod' %}
+                Cash On Delivery
+                {% endif %}
+              </p>
+            </div>
+        </div>
+        <div class="card" id="card-box">
+            <h5 class="card-header">Review Products</h5>
+            <div class="card-body" >
+                <table class="table table-borderless table-shopping-cart">
+                <thead class="text-muted">
+                <tr class="small text-uppercase">
+                  <th scope="col">Product</th>
+                  <th scope="col" width="120">Quantity</th>
+                  <th scope="col" width="120">Price</th>
+                    
+                </tr>
+                </thead>
+                <tbody>
+                  {% if item %}
+                  <tr>
+                      <td>
+                          <figure class="itemside align-items-center">
+                              <div class="aside"><img src="{{ item.image1.url }}" class="img-sm"></div>
+                              <figcaption class="info">
+                                  <a href="{{ item.get_url }}" class="title text-dark">{{item.product.product_name}}</a>
+                                  <!-- <p class="text-muted small">Matrix: 25 Mpx <br> Brand: Canon</p> -->
+                              </figcaption>
+                          </figure>
+                      </td>
+                      <td> 
+                          <!-- col.// -->
+                          <label for="">1</label>
+                      </td>
+                      <td> 
+                          <div class="price-wrap"> 
+                              {% if item.Offer_Price %}
+                              <!-- <var class="price">Rs {{ item.Offer_Price.new_price }}</var>
+                              <del  class="text-muted" style="font-size: 14px;">Rs {{item.sub_total}}</del> <br>
+                             <small class="text-muted"
+                                >Rs {{item.Offer_Price.new_price}} each
+                              </small>
+                              {% else %} -->
+                              <var class="price">Rs {{ item.sub_total }}</var>
+                              <small class="text-muted"
+                              >Rs {{item.variation.product.price}} each
+                            </small>
+                              {% endif %}
+                          </div> <!-- price-wrap .// -->
+                      </td>
+  
+                  </tr>
+                  {% else %}
+                    {% for cart_item in cart_items %}
+                <tr >
+                    <td>
+                        <figure class="itemside align-items-center">
+                            <div class="aside"><img src="{{ cart_item.product.pro_image1.url }}" style="max-width: 100%; height: 10rem;" class="img-sm img-thumbnail"></div>
+                            <figcaption class="info">
+                                <a href="" class="title text-dark">{{cart_item.product.product_name}}</a>
+                                <!-- <p class="text-muted small">Matrix: 25 Mpx <br> Brand: Canon</p> -->
+                            </figcaption>
+                        </figure>
+                    </td>
+                    <td> 
+                        <!-- col.// -->
+                        <label for="">{{ cart_item.quantity }}</label>
+                    </td>
+                    <td> 
+                        <div class="price-wrap"> 
+                          {% if cart_item.product.Offer_Price %}
+                          <var class="price">Rs {{ cart_item.product.Offer_Price.new_price }}</var>
+                          <del  class="text-muted" style="font-size: 14px;">Rs {{cart_item.sub_total}}</del> <br>
+                         <small class="text-muted"
+                            >Rs {{cart_item.product.Offer_Price.new_price}} each
+                          </small>
+                          {% else %}
+                          <var class="price">Rs {{ cart_item.sub_total }}</var>
+                          <br>
+                          <small class="text-muted"
+                          >Rs {{cart_item.varient.product.price}} each
+                        </small>
+                          {% endif %}
+                        </div> <!-- price-wrap .// -->
+                    </td>
+                    
+                </tr>
+                {% endfor %}
+                {% endif %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- card.// -->
+      </aside>
+      <!-- col.// -->
+      <aside class="col-lg-4">
+        <div class="card" id="card-box">
+          <div class="card-body">
+            <dl class="dlist-align">
+              <dt>Total price:</dt>
+              <dd class="text-right">Rs {{ total }}</dd>
+            </dl>
+            <dl class="dlist-align">
+              <dt>Tax:</dt>
+              <dd class="text-right">Rs {{tax}}</dd>
+            </dl>
+            <dl class="dlist-align">
+              <dt>Discount:</dt>
+              <dd class="text-right text-success b">{{discount}}%</dd>
+            </dl>
+            <!-- <dl class="dlist-align">
+              <dt>Coupon Applied:</dt>
+              <dd class="text-right text-success b">-{{amount_pay}}</dd>
+            </dl> -->
+            <dl class="dlist-align">
+              <dt>Grand Total:</dt>
+              <dd class="text-right  b">
+                <strong>Rs {{ grand_total }}</strong>
+              </dd>
+            </dl>
+            
+            <hr />
+
+
+
+
+            <p class="text-center mb-3">
+              <img
+                src=""
+                height="26"
+              />
+            </p>
+           
+            <div class="btn_container">
+              <!-- razorpay Button -->
+             
+              <div id="paypal-button-container">
+                <!-- Paypal button will load -->
+
+
+              </div>
+
+
+            </div>
+          
+           
+
+          </div>
+          <!-- card-body.// -->
+        </div>
+        <!-- card.// -->
+      </aside>
+      <!-- col.// -->
+    </div>
+    <!-- row.// -->
+    <!-- ============================ COMPONENT 1 END .// ================================= -->
+  </div>
+  <!-- container .//  -->
+</section>
+
+<!-- razorpay -->
+<!-- Razorpay's Javascript code. -->
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<!-- paypal script -->
+<script src="https://www.paypal.com/sdk/js?client-id=Afp8ZUZ3Lcgq5EjBTC30-7mOqLtje5QqWIJA-iEWEo4A6U7QZRZpkkXw5_lOLJsr9BOUj8KRQ9jZWKx1&currency=USD"></script>
+
+
+<script>
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+var amount = "{{grand_total}}"
+console.log(amount);
+var url = "{% url 'payments' %}"
+var csrftoken = getCookie('csrftoken');
+var orderID = "{{order.order_number}}"
+var payment_method = "Paypal"
+var redirect_url = "{% url 'order-complete' %}"
+
+
+  paypal.Buttons({
+    // Sets up the transaction when a payment button is clicked
+    createOrder: (data, actions) => {
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: amount  // Can also reference a variable or function
+          }
+        }]
+      });
+    },
+    // Finalize the transaction after payer approval
+    onApprove: (data, actions) => {
+      return actions.order.capture().then(function(orderData) {
+
+        console.log(orderData);
+        // Successful capture! For dev/demo purposes:
+        console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+        const transaction = orderData.purchase_units[0].payments.captures[0];
+        
+        sendData();
+        function sendData(){
+          fetch(url , {
+            method : "POST",
+            headers : {
+              "Content-type" : "application/json",
+              "X-CSRFToken"  : csrftoken,
+            },
+            body : JSON.stringify({
+              orderID : orderID,
+              transID : orderData.id,
+              payment_method : payment_method,
+              status : orderData.status,
+            }),
+
+          })
+         .then((response) => response.json())
+         .then((data) => {
+          window.location.href = redirect_url + '?order_number='+data.order_number+'&payment_id='+data.transID;
+
+         });
+
+        }
+        // When ready to go live, remove the alert and show a success message within this page. For example:
+        // const element = document.getElementById('paypal-button-container');
+        // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+        // Or go to another URL:  actions.redirect('thank_you.html');
+      });
+    }
+  }).render('#paypal-button-container');
+</script>
+<script src="/static/assets/js/script.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ <!--  <script>
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+  var csrftoken = getCookie('csrftoken');
+  var url = "{% url 'payments' %}" 
+  var order_id = "{{order.order_number}}"
+  var payment_method = "Razorpay"
+  var status = "success"
+
+var options = {
+    "key": "rzp_test_dfy2kppFQo0PuY", // Enter the Key ID generated from the Dashboard
+    "amount": "{{razorpay_amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Entrega",
+    "description": "Pruchase Transaction",
+    "image": "https://example.com/your_logo",
+    "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler": function (response){
+        function sendData(){
+
+          console.log(response.razorpay_payment_id)
+
+          fetch(url, {
+            method : "POST",
+            headers : {
+              "Content-type" : "application/json",
+              "X-CSRFToken" : csrftoken,
+            },
+            body: JSON.stringify({
+              orderID : order_id,
+              transID : response.razorpay_payment_id,
+
+            
+              payment_method:payment_method,
+              amount_paid:amount_paid,
+              status:status,
+              razorpay_payment_id:response.razorpay_payment_id,
+              razorpay_order_id:response.razorpay_order_id,
+             razorpay_signature:response.razorpay_signature,
+
+
+            }),
+          })
+          //.then((response) => response.json())
+          // .then((data) => console.log(data));
+        }
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+rzp1.on('payment.failed', function (response){
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+});
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>   -->
+  
+{% endblock %}

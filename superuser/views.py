@@ -1,0 +1,452 @@
+from django.shortcuts import render,redirect
+from order.models import Order, OrderProduct, Payment
+from store.models import Offers, Products
+from django.contrib import messages
+from .forms import Offerform, Productform, Statusform
+from category.forms import CategoryForm
+from accounts.models import Account
+from category.models import Category
+from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
+# Create your views here.
+
+
+def offer_update(request , id):
+
+    offer = Offers.objects.get(id = id)
+    form = Offerform(instance=offer)
+
+    if request.method == 'POST':
+        form  = Offerform(request.POST , instance=offer)
+
+        if form.is_valid():
+            print('Offer Update is valid')
+
+            form.save()
+            return redirect('admin-offer')
+        else:
+            print('offer update form is not valid')
+            messages.error(request , 'Please check the details')
+            return redirect(offer_update)
+    else:
+        print('Form is not valid')
+        messages.error(request, 'Details is not valid please check it!!!')
+
+    context = {
+        'form' : form,
+        'offer' : offer,
+    }
+
+
+    return render(request , 'superuser/admin-offer-update.html' , context)
+
+
+
+
+
+
+
+
+
+@login_required(login_url='admin-login')
+def offer_add(request):
+
+    form = Offerform()
+
+    if request.method == 'POST':
+        form = Offerform(request.POST)
+        print(form)
+        if form.is_valid():
+            print('offer form is valid')
+            form.save()
+            return redirect(offer)
+        else:
+            print('offer is not valid')
+            messages.error(request, 'Please check the details')
+            return redirect(offer_add)
+
+    category = Category.objects.all()
+    product = Products.objects.all()
+    context = {
+        'form' : form,
+        'category' : category,
+        'product' : product,
+    }
+    return render(request , 'superuser/admin-offer-add.html' , context)
+
+
+
+
+
+
+@login_required(login_url='admin-login')
+def offer_delete(request , id):
+
+    offers = Offers.objects.get(id =  id)
+
+    if request.method == 'POST':
+        offers.delete()
+        print('offer deleted successfully')
+        return redirect(offer)
+
+
+
+
+
+@login_required(login_url='admin-login')
+def offer(request):
+
+    offer = Offers.objects.all()
+
+    context = {
+        'offer' : offer,
+    }
+
+
+    return render(request , 'superuser/admin-offer.html', context)
+
+
+
+
+
+
+@login_required(login_url='admin-login')
+def admin_update_status(request , id ):
+    
+    order_id = id
+
+    print(order_id)
+
+    status = Order.objects.get(order_number = order_id)
+
+    print(status)
+
+    form = Statusform(instance=status)
+
+    
+
+    if request.method == 'POST':
+        form = Statusform(request.POST , instance = status)
+
+        if form.is_valid():
+            print('Form is Valid')
+
+            form.save()
+            return redirect(admin_order)
+        else:
+            print('Form is Invalid')
+            messages.error(request , 'Details is not valid please check it!!')
+
+    else:
+        print('Form is Not Valid')
+        messages.error(request , 'Details is not valid please check it!!')
+
+    context = {
+        'form' : form,
+        'status': status,
+    }
+
+    return render(request , 'superuser/admin-status.html' ,context)
+    
+
+
+@login_required(login_url='admin-login')
+def admin_order(request):
+    order_product = OrderProduct.objects.all()
+
+    sub_total = 0 
+    
+    for i in order_product:
+        sub_total += i.product_price * i.quantity + i.order.tax
+
+    
+
+
+    context = {
+        'order_product' : order_product,
+        'sub_total'     : sub_total,
+
+    }
+
+    return render (request , 'superuser/admin-order.html' , context)
+
+
+
+
+
+
+@login_required(login_url='admin-login')
+def admin_product_list(request):
+    product = Products.objects.all()
+
+    context = {
+        'product' : product,
+    }
+
+    return render(request , 'superuser/admin-product-list.html' , context)
+
+@login_required(login_url='admin-login')
+def admin_category_add(request):
+
+    if request.method == 'POST':
+        print('posted success')
+        form = CategoryForm(request.POST , request.FILES)
+        if form.is_valid():
+            print('form is valid')
+            form.save()
+            return redirect(admin_category)
+        else:
+            messages.error(request , 'Details is not valid please check it!!')
+            print('form is invalid')
+            return redirect(admin_category_add)
+
+    form = CategoryForm()
+    category = Category.objects.all()
+    context = {
+        'form' : form,
+        'category': category
+    }
+
+
+    return render(request , 'superuser/admin-category-add.html' , context)
+
+
+
+
+
+
+@login_required(login_url='admin-login')
+def admin_category_delete(request , id):
+    category = Category.objects.get(id = id )
+    print(category)
+    if request.method == 'POST':
+        category.delete()
+        print('Category deleted successfully')
+        return redirect(admin_category)
+    
+
+@login_required(login_url='admin-login')
+def admin_category_update(request , id):
+    category_id = id
+    category = Category.objects.get(id = category_id)
+    print(category)
+    form = CategoryForm(instance=category)
+
+    if request.method == 'POST':
+        form = CategoryForm(request.POST , request.FILES , instance = category)
+        if form.is_valid():
+            print('form is valid')
+            form.save()
+            return redirect(admin_category)
+        else:
+            print('Form is Invalid')
+            messages.error(request , 'Details is not valid please check it!!')
+    
+    context = {
+        'form' : form,
+        'category' : category
+    }
+    return render(request , 'superuser/admin-category-update.html' , context)
+
+
+
+@login_required(login_url='admin-login')
+def admin_category(request):
+
+    category = Category.objects.all()
+
+    context = {
+        'category' : category
+    }
+
+    return render(request , 'superuser/admin-category.html' , context)
+
+
+@login_required(login_url='admin-login')
+def admin_user_block(request , id):
+    user = Account.objects.get(id = id)
+    print(user)
+    if user.is_active:
+        user.is_active = False
+        user.save()
+        print('user blocked')
+    else:
+        user.is_active = True
+        user.save()
+        print('user unblocked')
+    return redirect(admin_user_list)
+
+
+
+
+@login_required(login_url='admin-login')
+def admin_user_list(request):
+
+    account = Account.objects.all()
+
+    context = {
+        'account' : account
+    }
+
+    return render(request , 'superuser/admin-user-list.html' , context)
+
+
+
+
+
+
+@login_required(login_url='admin-login') 
+def admin_home(request):
+
+    products = Products.objects.all()
+    order = OrderProduct.objects.all()
+
+
+    cod = Payment.objects.filter(payment_method = 'COD').count()
+    paypal = Payment.objects.filter(payment_method = 'Paypal').count()
+
+    """ order status count """
+
+    ready = Order.objects.filter(status = 'Ready for Shipping').count()
+    shipped = Order.objects.filter(status = 'Shipped').count()
+    out = Order.objects.filter(status = 'Out for Delivery').count()
+    delivered = Order.objects.filter(status = 'Delivered').count()
+    cancelled = Order.objects.filter(status = 'Cancelled').count()
+
+    status = ['Ready to Ship' , 'Shipped' , 'Out for Delivery' , 'Delivered' , 'Cancelled'] 
+    status_no = [ready , shipped , out , delivered , cancelled]
+
+    user = Account.objects.all()
+    user_count = user.count()
+    print(user_count)
+
+    
+
+    sub_total = 0
+    for i in order:
+        sub_total += i.product_price * i.quantity + i.order.tax
+
+    order_count = order.count()
+
+    print(f"Order count :  {order_count}")
+
+    context = {
+        'products' : products,
+        'order_count' : order_count,
+        'sub_total' : sub_total,
+        'user_count' : user_count,
+        'cod' : cod,
+        'paypal':paypal,
+        'status': status,
+        'status_no' : status_no,
+
+    }
+
+    return render(request , 'superuser/admin-home.html' , context)
+
+
+
+
+@login_required(login_url='admin-login')
+def admin_product_update(request ,id ):
+    product_id = id
+    products = Products.objects.get(id = product_id)
+    form = Productform(instance=products)
+
+    if request.method == 'POST':
+        form = Productform(request.POST , request.FILES , instance =products)
+        if form.is_valid():
+            print('form is valid')
+            form.save()
+            return redirect(admin_home)
+        else:
+            print('Form is not valid')
+            messages.error(request, 'Details is not valid please check it!!')
+            return redirect(admin_product_update)
+    form = Productform(instance = products)
+    context = {
+        'form' : form,
+        'products' : products
+    }
+
+    return render(request , 'superuser/admin-product-update.html', context)
+
+
+
+
+@login_required(login_url='admin-login')
+def admin_product_delete(request , id):
+    products = Products.objects.get(id=id)
+    print(products)
+    if request.method == 'POST':
+        products.delete()
+        print('deleted successfully')
+        return redirect(admin_product_list)
+    
+
+
+
+@login_required(login_url='admin-login')
+def admin_product(request):
+    
+    if request.method == 'POST':
+        print('posted success')
+        form = Productform(request.POST , request.FILES)
+        if form.is_valid():
+            print('form is valid')
+            form.save()
+            return redirect(admin_product_list)
+        else:
+            print(form.errors)
+            messages.error(request , 'Details is not valid please check it!!')
+            print('form is invalid')
+            return redirect(admin_product)
+    else:
+        form = Productform()
+        context = {
+            'form' : form
+        }
+
+    return render(request , 'superuser/admin-product.html' , context)
+
+
+@never_cache
+def admin_login(request):
+    if request.user.is_authenticated:
+        return redirect(admin_home)
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        
+        user = authenticate(request , email = email , password = password)
+        print(user)
+        if user is not None:
+            user = Account.objects.get(email=email)
+            if user.is_admin == True:
+                login(request , user)
+            else:
+                messages.error(request , 'User is not found')
+                return redirect(admin_login)
+        else:
+            messages.error(request , 'User is not found')
+            print('user is none')
+
+
+    return render(request , 'superuser/admin-login.html')
+
+
+def admin_logout(request):
+    logout(request )
+    return redirect(admin_login)
+
+
+
+
+
+
+
+
+
+
+

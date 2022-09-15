@@ -1,0 +1,322 @@
+{%  extends 'index.html' %}
+
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'cart.css' %}">
+<link rel="stylesheet" href="{% static 'home.css' %}">
+
+<!-- jQuery -->
+<script src="/static/cart/jquery-2.0.0.min.js" type="text/javascript"></script>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Poppins:wght@400;500;700&display=swap"
+rel="stylesheet">
+<!-- Bootstrap4 files-->
+<script src="/static/cart/bootstrap.bundle.min.js" type="text/javascript"></script>
+<link href="/static/cart/bootstrap.css" rel="stylesheet" type="text/css"/>
+
+<!-- Font awesome 5 -->
+
+
+<!-- custom style -->
+<link href="/static/cart/responsive.css"rel="stylesheet" media="only screen and (max-width: 1200px)" />
+
+<!-- custom javascript -->
+<script src="/static/cart/script.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+/// some script
+
+// jquery ready start
+$(document).ready(function() {
+	// jQuery code
+
+}); 
+// jquery end
+</script>
+
+</head>
+<body style="
+background: url(/static/assets/images/section-wrapper-bg.jpg);
+">
+
+
+	<header class="header">
+
+		<!-- 
+		  - overlay
+		-->
+		<div class="overlay" data-overlay></div>
+	
+		<div class="container" style="justify-content: space-between;">
+	
+		  <div class="logo">
+			<a href="#" >
+			  <img src="/static/assets/images/entrega-logo.png">
+			</a>
+		  </div>
+	
+		  <button class="nav-open-btn" data-nav-open-btn>
+			<ion-icon name="menu-outline"></ion-icon>
+		  </button>
+	
+		  <nav class="navbar" id="navbar" data-nav >
+	
+			<div class="navbar-top">
+	
+			  <div class="logo">
+				<a href="#" >
+				  <img src="/static/assets/images/entrega-logo.png">
+				</a>
+			  </div>
+	
+			  <button class="nav-close-btn" data-nav-close-btn>
+				<ion-icon name="close-outline"></ion-icon>
+			  </button>
+	
+			</div>
+	
+			<ul class="navbar-list">
+	
+			  <li>
+				<a href="{% url 'home_user' %}" class="navbar-link">Home</a>
+			  </li>
+	
+			  {% if user is None %}
+			  <li>
+				<a href="{% url 'signup_user' %}" class="navbar-link">Signup</a>
+			  </li>
+			  {% endif %}
+			 
+	
+			  
+	
+			  <li>
+				<a href="{% url 'store' %}" class="navbar-link">Store</a>
+			  </li>
+			  
+			  
+			  <li>
+				<a href="{% url 'cart' %}" class="flex items-center text-white font-medium gap-2 relative">
+					<span class="material-icons">shopping_cart</span>
+					<!-- badge count -->
+					<div class="w-5 h-5 p-2 bg-red-500 text-xs rounded-full absolute -top-2 left-3 flex justify-center items-center border">
+						{{cart_count}}
+					</div>
+					<!-- badge count -->
+					Cart
+				</a>
+			  </li>
+			  
+	
+			</ul>
+	
+			<ul class="nav-social-list">
+	
+			  <li>
+				<a href="#" class="social-link">
+				  <ion-icon name="logo-twitter"></ion-icon>
+				</a>
+			  </li>
+	
+			  <li>
+				<a href="#" class="social-link">
+				  <ion-icon name="logo-instagram"></ion-icon>
+				</a>
+			  </li>
+	
+			  <li>
+				<a href="#" class="social-link">
+				  <ion-icon name="logo-github"></ion-icon>
+				</a>
+			  </li>
+	
+			  <li>
+				<a href="#" class="social-link">
+				  <ion-icon name="logo-youtube"></ion-icon>
+				</a>
+			  </li>
+	
+			</ul>
+	
+		  </nav>
+		 
+	  </header>
+
+
+<section class="section-content padding-y bg" >
+<div class="container" id="product_data" >
+
+<!-- ============================ COMPONENT 1 ================================= -->
+{% if not cart_items %}
+<div class="container-fluid  mt-100" >
+	
+	<div class="row">
+
+	
+	   <div class="col-md-12">
+		
+	   
+			   <div class="card">
+		   <div class="card-header">
+		   <h5>Cart</h5>
+		   </div>
+		   <div class="card-body cart">
+				   <div class="col-sm-12 empty-cart-cls text-center">
+					   <img src="/static/img/empty-cart-3385483.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+					   <h3><strong>Your Cart is Empty</strong></h3>
+					   <h4>Add something to make me happy :)</h4>
+					   <a href="{% url 'store' %}" class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</a>
+					   
+				   
+				   </div>
+		   </div>
+   </div>
+</div>
+</div>
+   
+   </div>
+{% else %}
+<h2 class="h2 section-title">Cart</h2>
+<div class="row">
+	<aside class="col-lg-9">
+<div class="card">
+<table class="table table-borderless table-shopping-cart">
+<thead class="text-muted">
+<tr class="small text-uppercase">
+  <th scope="col">Product</th>
+  <th scope="col" width="120">Quantity</th>
+  <th scope="col" width="120">Price</th>
+  <th scope="col" class="text-right" width="200"> </th>
+</tr>
+</thead>
+<tbody>
+
+{% for cart_item in cart_items %}
+<tr>
+	<td style="width: 2rem;">
+		<figure class="itemside align-items-center">
+			<div class="aside"><a href="{{ cart_item.product.get_url }}"><img src="{{cart_item.product.pro_image1.url}}" class="img-sm" style="width: 4rem;"></a></div>
+			<figcaption class="info">
+				<a href="{{ cart_item.product.get_url }}" class="title text-dark">{{cart_item.product.product_name_card}}</a>
+				<p class="text-muted small">category: {{cart_item.product.category}}</p>
+			</figcaption>
+		</figure>
+	</td>
+	<td> 
+		<!-- col.// -->
+					<div class="col"> 
+						<div class="input-group input-spinner  " >
+							<div class="input-group-prepend" >
+								<input type="hidden"  class="prod_id " id="{{cart_item.product.id}}" >
+								{% csrf_token %}
+							<a 
+							 class="btn btn-light"
+							 id="button-plus"
+							 hx-get = "{% url 'remove-cart' cart_item.product.id  %}"
+							 hx-target = '#product_data'
+							 hx-swap = 'innerHTML'
+
+							>
+								<i class="fa fa-minus"></i>
+							</a>
+							</div> 
+							<input type="text" class="form-control disabled" id="input-value" value="{{cart_item.quantity}}" style="width: 0rem;">
+							<div class="input-group-append">
+							<a  
+								hx-get = "{% url 'add-cart' cart_item.product.id %}"
+								hx-swap = 'innerHTML'
+								hx-target = '#product_data'
+								class="btn btn-light"
+								id="button-minus">
+								<i class="fa fa-plus"></i> 
+							</a>
+							
+
+							<!-- button -->
+							
+							<!--  end button -->
+
+
+
+							</div>
+						</div> <!-- input-group.// -->
+					</div> <!-- col.// -->
+	</td>
+	<td> 
+		<div class="price-wrap"> 
+			<var class="price">₹{{cart_item.sub_total}}</var> 
+      <br>
+			<small class="text-muted">₹{{cart_item.product.price}}</small> 
+		</div> <!-- price-wrap .// -->
+	</td>
+	<td class="text-right"> 
+	<a 
+		class="btn btn-danger text-light"
+		hx-get = "{% url 'remove-cart-item' cart_item.product.id %}"
+		hx-swap = 'innerHTML'
+		hx-target = '#product_data'>
+		 Remove
+	</a>
+	</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div> <!-- card.// -->
+
+	</aside> <!-- col.// -->
+	<aside class="col-lg-3">
+
+		<div class="card">
+		<div class="card-body">
+			<dl class="dlist-align">
+			  <dt>Total price:</dt>
+			  <dd class="text-right">₹{{total}}</dd>
+			</dl>
+			<dl class="dlist-align">
+			  <dt>Tax:</dt>
+			  <dd class="text-right">₹{{tax_amount}}</dd>
+			</dl>
+			<dl class="dlist-align">
+			  <dt>Total:</dt>
+			  <dd class="text-right text-dark b"><strong>₹{{sub_total}}</strong></dd>
+			</dl>
+			<hr>
+			<p class="text-center mb-3">
+			</p>
+			<a href="{% url 'checkout' %}" class="btn btn-primary btn-block"> Checkout </a>
+			<a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Shopping</a>
+		</div> <!-- card-body.// -->
+		</div> <!-- card.// -->
+
+</aside> <!-- col.// -->
+
+
+</div> <!-- row.// -->
+<!-- ============================ COMPONENT 1 END .// ================================= -->
+{% endif %}
+</div> <!-- container .//  -->
+</section>
+
+<script src="https://unpkg.com/htmx.org@1.8.0" integrity="sha384-cZuAZ+ZbwkNRnrKi05G/fjBX+azI9DNOkNYysZ0I/X5ZFgsmMiBXgDZof30F5ofc" crossorigin="anonymous"></script>
+
+
+
+  <!-- 
+    - custom js link
+  -->
+  <script src="/static/assets/js/script.js"></script>
+
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+<!-- ========================= SECTION CONTENT END// ========================= -->
+</body>
+</html>
+
+
+{% endblock %}

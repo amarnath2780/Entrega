@@ -1,0 +1,19 @@
+#payment-banner{
+    background: url(./assets/images/section-wrapper-bg.jpg);
+    margin-top: 10%;
+}
+#payment-row{
+    padding: 6rem 1px;
+    color: #fff;
+     
+}
+.card-details{
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/static/assets/images/wallpaperflare-cropped.jpeg);
+}
+#card-box{
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/static/assets/images/wallpaperflare-cropped.jpeg);
+    
+}
+.itemside .aside img{
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/static/assets/images/wallpaperflare-cropped.jpeg);
+}

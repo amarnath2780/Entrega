@@ -1,0 +1,39 @@
+
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Entrega</title>
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+      </head>
+      <body>
+        <main>
+          
+          
+            <div class="px-4 py-5 my-5 text-center">
+              <img class="d-block mx-auto mb-4" src="../authentication/logo.svg" alt="" style="
+              width: 20rem;
+              padding-right: 1rem;
+          ">
+              <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4"> your email verification is successfull. please click below button to login..
+                </p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                  <a href="{% url 'login' %}" type="button" class="btn btn-outline-success btn-sm px-4">to login</a>
+                </div>
+              </div>
+            </div>
+        </mail>
+
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script >
+            swal("Verified!", "hi {{user.firstname}}{{user.lastname}}, You are welcome to Entrega ", "success");
+        </script>
+    
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    
+    
+    </body>
+    </html>

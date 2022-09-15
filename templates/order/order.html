@@ -1,0 +1,190 @@
+{%  extends 'nav.html' %}
+
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'cart.css' %}">
+<link rel="stylesheet" href="{% static 'home.css' %}">
+
+<!-- jQuery -->
+<script src="/static/cart/jquery-2.0.0.min.js" type="text/javascript"></script>
+
+<!-- Bootstrap4 files-->
+<script src="/static/cart/bootstrap.bundle.min.js" type="text/javascript"></script>
+<link href="/static/cart/bootstrap.css" rel="stylesheet" type="text/css"/>
+
+<!-- Font awesome 5 -->
+
+
+<!-- custom style -->
+<link href="/static/cart/responsive.css"rel="stylesheet" media="only screen and (max-width: 1200px)" />
+
+<!-- custom javascript -->
+<script src="/static/cart/script.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+/// some script
+
+// jquery ready start
+$(document).ready(function() {
+	// jQuery code
+
+}); 
+// jquery end
+</script>
+
+</head>
+<body>
+
+
+	
+
+<section class="section-content padding-y bg" >
+<div class="container">
+
+<!-- ============================ COMPONENT 1 ================================= -->
+{% if not order_product %}
+<div class="container-fluid  mt-100">
+	
+	<div class="row">
+
+	
+	   <div class="col-md-12">
+		
+	   
+			   <div class="card" >
+		   <div class="card-header">
+		   <h5>Cart</h5>
+		   </div>
+		   <div class="card-body cart">
+				   <div class="col-sm-12 empty-cart-cls text-center">
+					   <img src="/static/img/empty-cart-3385483.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+					   <h3><strong>Your Order list is Empty</strong></h3>
+					   <h4>Add something to make me happy :)</h4>
+					   <a href="{% url 'store' %}" class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</a>
+					   
+				   
+				   </div>
+		   </div>
+   </div>
+</div>
+</div>
+   
+   </div>
+{% else %}
+<div class="main-panel" >
+        <div class="content-wrapper">
+          <div class="page-header" id="order-title">
+            <h3 class="page-title" > My Order </h3>
+            <nav aria-label="breadcrumb">
+              
+            </nav>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body" id="card-box">
+                    <p class="card-description"> <code>Number of Orders : {{order_count}}</code>
+                    </p>
+                    <div class="table-responsive">
+                      <table class="table table-dark">
+                        <thead>
+                          <tr>
+                            <th> #  </th>
+                            <th> Image </th>
+                            <th> Product Name </th>
+                            <th> Price + Tax </th>
+                            <th> Quantity </th>
+                            
+                            <th>Payment</th>
+							<th>Status</th>
+							<th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for order in order_product %}
+                          <tr>
+                            <td> </td>
+                            <td> <img src="{{order.product.pro_image1.url}}" alt=""> </td>
+                            <td> {{order.product.product_name}} </td>
+                            <td> ₹ {{order.product.price}} + {{order.order.tax}}</td>
+                            <td> {{order.quantity}} </td>
+                            <td>{{order.Payment.payment_method}}</td>
+							<td>{{order.order.status}}</td>
+						{% if order.order.status != 'Out for Delivery' %}
+							{% if order.order.status == 'Cancelled'  %}
+							
+							<td><button class="btn btn-outline-warning disabled" >Cancelled</button></td>
+
+
+							{% else %}
+							<td>
+								<a href="" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal{{order.order.order_number}}">
+								  Cancel
+								</a>
+  
+								<!-- Modal -->
+								<div class="modal fade" id="exampleModal{{order.order.order_number}}" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+								  <div class="modal-dialog" role="document">
+									<div class="modal-content">
+									  <div class="modal-header">
+										<h5 class="modal-title text-danger" id="exampleModalLabel">Order Cancellation</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										  <span aria-hidden="true">&times;</span>
+										</button>
+									  </div>
+									  <div class="modal-body text-warning">
+										Do You Really want to Cancel this Order
+									  </div>
+									  <div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+										<form action="{% url 'order-cancel' order.order.order_number %}" method="post">
+										  {% csrf_token %}
+										  <button type="submit" class="btn btn-danger" >Cancel</button>
+										</form>
+									  </div>
+									</div>
+								  </div>
+								</div>
+							</td>
+							{% endif %}
+						{% else %}
+						<td><button class="btn btn-outline-warning disabled" >Out for Delivery</button></td>
+							{% endif %}
+                          </tr>
+
+                        {% endfor  %}
+
+                        </tbody>
+                        
+                      </table>
+                    
+                  
+            
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        
+        <!-- partial -->
+      </div>
+	  <div class="total" >
+		<h4 class="total-amount" >Total Amount : ₹ {{sub_total}}</h4>
+	  </div>
+	 
+<!-- ============================ COMPONENT 1 END .// ================================= -->
+{% endif %}
+</div> <!-- container .//  -->
+</section>
+
+<script src="/static/assets/js/script.js"></script>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+</body>
+
+</html>
+
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'product.css' %}">
+
+
+
+
+<div class="container"> <div id="demo" class="" data-ride=""> 
+	<div class=""> <div class=" active"> 
+		<div class="card"> <div class="path">HOME / FACE <a>/ CLEANSERS</a> 
+		</div> 
+		<div class="row">
+			 <div class="col-md-6 text-center align-self-center">
+				 <img class="img-fluid" src="{{single_product.pro_image1.url}}">
+			 </div> 
+			 <div class="col-md-6 info"> <div class="row title"> 
+				<div class="col"><h2>{{ single_product.product_name }}</h2></div> <div class="col text-right">
+					<a href="#"><i class="fa fa-heart-o"></i></a>
+				</div> 
+			</div>
+			 <p>Natural herbal wash</p>
+			  <span class="fa fa-star checked"></span>
+			   <span class="fa fa-star checked"></span> 
+			   <span class="fa fa-star checked"></span>
+			    <span class="fa fa-star checked"></span>
+				 <span class="fa fa-star-half-full"></span> 
+				 <span id="reviews">1590 Reviews</span>
+				  <div class="row price"> <label class="radio"> 
+					<input type="radio" name="size1" value="small" checked>
+					 <span> <div class="row"><b></b></div>
+						<p>{{ single_product.product_discription }}</p>
+							</div> 
+						</div>
+					 </div>
+					  <div class="row lower"> 
+						<div class="col text-right align-self-center">
+							{% if single_product.stock <= 0 %}
+								<h5> Out of stock </h5>
+							{% else %}
+								{% if single_product.stock <= 10 %}
+									<h5> Only {{single_product.stock}} Available</h5>
+								{% endif %}
+
+								{% if in_cart %}
+
+								
+								<a href="{% url 'cart' %}" class="btn">View the  Cart</a>
+
+								{% else %}
+
+
+								<a href="{% url 'add-cart' single_product.id %}" class="btn">Add to Cart</a>
+
+								{% endif %}
+
+							{% endif %}
+						</div> 
+					</div> 
+				</div>  
+			</div> 
+		</div> 
+	</div>
+
+
+
+{% endblock %}

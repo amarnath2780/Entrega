@@ -1,0 +1,131 @@
+{% extends 'index.html' %}
+
+{% block content  %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'signup.css' %}">
+
+
+<div class="upper">
+    <div class="logo">
+        <a href="#">
+            <img src="../static/img/logo2.svg" class="img-logo"/>
+        </a>
+    </div>
+    
+    <div class="login-div">
+        <form class="login" method="POST" >
+            
+            <div class="signin-button-one">
+                <a href="{% url 'signup_user' %}" >Signup with Email 
+                    
+                </a>
+            </div>
+            <br>
+
+            {% csrf_token %}
+            
+            <h1>Sign Up</h1>
+            <div class="input-text">
+                {{form.first_name}}
+                {{form.first_name.label}}
+            </div>
+
+            <div class="input-text">
+                {{form.last_name}}
+                {{form.last_name.label}}
+            </div>
+
+            <div class="input-text">
+                {{form.mobile}}
+                {{form.mobile.label}}
+            </div>
+           
+            
+            <div class="input-text">
+                {{form.email}}
+                {{form.email.label}}
+            </div>
+
+            <div class="input-text">
+                {{form.password}}
+                {{form.password.label}}
+            </div>
+
+            <div class="input-text">
+                {{form.confirm_password}}
+                {{form.confirm_password.label}}
+                
+            </div>
+            
+            {% if messages %}
+            <div class="alert alert-danger w-40 mx-auto" role="alert">
+              
+            <div class="messages">
+                {% for message in messages %}
+                 <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>        
+                 {{ message }}
+            </div>
+                {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            <div>
+                <button type="submit" class="signin-button">Sign Up
+                    
+                </button>
+            </div>
+            
+            <div class="remember-flex">
+                <div class="help">
+                    <a class="color_text" href="#">Forgot Password</a>
+                </div>
+            </div>
+            <div class="new-members">
+                Already have a account? <a href="{% url 'home_user'  %}" class="signup-link">Sign In now</a>.
+            </div>
+        </form>
+    </div>
+</div>
+<div class="bottom">
+    <div class="bottom-width">
+        Questions? Call <a href="tel:1-844-542-4813" class="tel-link">+918848364263</a>
+        <div>
+            <ul class="bottom-flex">
+                <li class="list-bottom">
+                    <a href="#" class="link-bottom">
+                        FAQ
+                    </a>
+                </li>
+                <li class="list-bottom">
+                    <a href="#" class="link-bottom">
+                        Help Center
+                    </a>
+                </li>
+                <li class="list-bottom">
+                    <a href="#" class="link-bottom">
+                        Terms of Use
+                    </a>
+                </li>
+                <li class="list-bottom">
+                    <a href="#" class="link-bottom">
+                        Privacy
+                    </a>
+                </li>
+                <li class="list-bottom">
+                    <a href="#" class="link-bottom">
+                        Cookie Preferences
+                    </a>
+                </li>
+                <li class="list-bottom">
+                    <a href="#" class="link-bottom">
+                        Corporate information
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,145 @@
+
+  
+  
+
+
+
+
+
+/*-----------------------------------*\
+  #SHOP
+\*-----------------------------------*/
+
+.shop .title-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    margin-block-end: 50px;
+  }
+  
+  .shop .btn-link:is(:hover, :focus) { color: var(--hoockers-green); }
+  
+  .shop-card .card-banner {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .shop-card .badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+  
+  .shop-card .card-actions {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
+    display: grid;
+    gap: 10px;
+    opacity: 0;
+    transition: var(--transition-2);
+  }
+  
+  .shop-card .action-btn {
+    background-color: var(--white);
+    font-size: 24px;
+    padding: 12px;
+    border-radius: 50%;
+    transition: var(--transition-1);
+  }
+  
+  .shop-card .action-btn:is(:hover, :focus) {
+    background-color: var(--black);
+    color: var(--white);
+  }
+  
+  .shop-card:is(:hover, :focus-within) .card-actions {
+    opacity: 1;
+    transform: translate(-20px, -50%);
+  }
+  
+  .shop-card .card-content {
+    padding-block: 20px;
+    text-align: center;
+  }
+  
+  .shop-card :is(.price, .card-rating, .rating-wrapper) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .shop-card .del {
+    font-size: var(--fs-9);
+    font-weight: var(--fw-400);
+  }
+  
+  .shop-card .price .span {
+    color: var(--black);
+    font-weight: var(--fw-700);
+  }
+  
+  .shop-card .card-title {
+    color: var(--black);
+    font-size: var(--fs-7);
+    font-weight: var(--fw-500);
+    margin-block-end: 8px;
+    transition: var(--transition-1);
+  }
+  
+  .shop-card .card-title:is(:hover, :focus) {
+    text-decoration: underline;
+    color: var(--hoockers-green);
+  }
+  
+  .shop-card .rating-wrapper {
+    gap: 2px;
+    color: var(--hoockers-green);
+    font-size: 15px;
+  }
+  
+  .shop-card .rating-text {
+    font-size: var(--fs-8);
+    font-weight: var(--fw-400);
+    line-height: 1;
+  }
+  
+  /*-----------------------------------*\
+  #BANNER
+\*-----------------------------------*/
+
+.banner-list {
+    display: grid;
+    gap: 30px;
+  }
+  
+  .banner-card {
+    min-height: 420px;
+    padding: 30px;
+  }
+  
+  .banner-card .card-subtitle {
+    color: var(--black);
+    font-size: var(--fs-6);
+    font-weight: var(--fw-600);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .banner-card :is(.card-subtitle, .card-title) { text-shadow: 0 0 2px var(--cultured-2); }
+  
+  .banner-card-1 .card-title { margin-block: 10px 30px; }
+  
+  .banner-card .card-text {
+    color: var(--black);
+    font-size: var(--fs-7);
+    margin-block: 10px 25px;
+  }
+
+.has-scrollbar {
+    display: flex;
+}

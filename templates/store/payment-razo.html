@@ -1,0 +1,40 @@
+{% extends 'store/base.html' %}
+{% block content %}
+<div class="container">
+    <button id="pay-btn" class="btn" value="{{razorpay_amount}}">Pay now</button>
+</div>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  var options = {
+    key: "{{ razorpay_merchant_key }}",
+    amount: "{{ razorpay_amount }}",
+    currency: "{{ currency }}",
+    name: "Bikera",
+    order_id: "{{ razorpay_order_id }}",
+    callback_url: "{{ callback_url }}",
+  };
+   
+
+  var rzp1 = new Razorpay(options);
+  document.getElementById("pay-btn").onclick = function (e) {
+    rzp1.open();
+    e.preventDefault();
+    $.ajax({
+      type : 'POST',
+      url : "order/paymenthandler/",
+      data : {
+          productid : $(this).val(),
+          csrfmiddlewaretoken : "{{csrf_token}}",
+          action : 'post', 
+      },
+      success : function (response) {
+         console.log("payment amount sent success")
+      },
+      error : function (response) {
+        console.log("amount data sent error")
+      }
+    });
+    
+  };
+</script>
+{% endblock %}

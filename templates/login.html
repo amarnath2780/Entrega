@@ -1,0 +1,157 @@
+{% extends 'index.html' %}
+
+
+
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'signup.css' %}">
+
+
+<div class="upper">
+    <div class="logo">
+        <a href="#">
+            <img src="../static/img/logo2.svg" class="img-logo"/>
+        </a>
+    </div>
+    <div class="login-div">
+        <form class="login" method="POST" id="registration_form">
+
+            <div class="signin-button-one">
+                <a href="{% url 'login-phone' %}"  > Signin With Phone </a>
+            </div>
+            <br>
+            <br>
+            {% csrf_token %}
+            <h1>Sign In</h1>
+            <div class="input-text">
+                <input type="text" id="inputEmail" name="email" placeholder="Email" />
+                <div class="warning-input" id="email_error_message">
+                    Please enter a valid email or phone number.
+                    
+                </div>
+            </div>
+            
+            <div class="input-text">
+                <input type="password" id="inputPassword" name="password" placeholder="Password" />
+                <div class="warning-input" id="password_error_message">
+                    Your password must contain between 4 and 60 characters.
+                </div>
+            </div>
+            
+            <div>
+                <button type="submit " class="signin-button">Sign In
+                    
+                </button>
+            </div>
+            <br>
+            <br>
+            {% if messages %}
+            <div class="alert alert-danger w-40 mx-auto" role="alert">
+              
+            <div class="messages">
+                {% for message in messages %}
+                 <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>        
+                 {{ message }}
+            </div>
+                {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            <div class="remember-flex">
+                <div class="help">
+                    <a class="color_text" href="{% url 'forgot_password' %}">Forgot password?</a>
+                </div>
+                <div class="new-members">
+                    New to Entrega? <a href="{% url 'signup_user' %}" class="signup-link">Sign up now</a>.
+                </div>
+            </div>
+           
+        </form>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" ></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+
+<script type="text/javascript">
+
+    $("registration_form"). submit(function(e){
+    e. preventDefault();
+    });
+
+    
+    $(function() {
+
+       $("#email_error_message").hide();
+       $("#password_error_message").hide();
+
+
+       var error_email = false;
+       var error_password = false;
+
+       $("#inputEmail").focusout(function() {
+          check_email();
+       });
+       $("#inputPassword").focusout(function() {
+          check_password();
+       });
+
+
+       
+
+       function check_password() {
+          var password_length = $("#inputPassword").val().length;
+          if (password_length < 8) {
+             $("#password_error_message").html("Atleast 8 Characters");
+             $("#password_error_message").show();
+             $("#inputPassword").css("border-bottom","2px solid #F90A0A");
+             error_password = true;
+          } else {
+             $("#password_error_message").hide();
+             $("#inputPassword").css("border-bottom","2px solid #34F458");
+          }
+       }
+
+       function check_email() {
+          var pattern = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+          var email = $("#inputEmail").val();
+          if (pattern.test(email) && email !== '') {
+             $("#email_error_message").hide();
+             $("#inputEmail").css("border-bottom","2px solid #34F458");
+          } else if(email == ''){
+             $("#email_error_message").html("Please enter your email address");
+             $("#email_error_message").show();
+             $("#inputEmail").css("border-bottom","2px solid #F90A0A");
+          }
+          else {
+             $("#email_error_message").html("Please enter a valid email address");
+             $("#email_error_message").show();
+             $("#inputEmail").css("border-bottom","2px solid #F90A0A");
+             error_email = true;
+          }
+       }
+
+       $("#registration_form").submit(function() {
+          error_email = false;
+          error_password = false;
+
+          check_email();
+          check_password();
+
+          if (error_email === false && error_password === false) {
+             
+             return true;
+          } else {
+             alert("Please Fill the form Correctly");
+             return false;
+          }
+
+
+       });
+    });
+ </script>
+
+{% endblock %}

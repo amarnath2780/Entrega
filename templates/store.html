@@ -1,0 +1,339 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'home.css' %}">
+
+
+<header class="header">
+
+  <!-- 
+    - overlay
+  -->
+  <div class="overlay" data-overlay></div>
+
+  <div class="container">
+
+    <div class="logo">
+      <a href="#" >
+        <img src="/static/assets/images/entrega-logo.png">
+      </a>
+    </div>
+
+    <button class="nav-open-btn" data-nav-open-btn>
+      <ion-icon name="menu-outline"></ion-icon>
+    </button>
+
+    <nav class="navbar" data-nav>
+
+      <div class="navbar-top">
+
+        <div class="logo">
+          <a href="#" >
+            <img src="../static/assets/images/entrega-logo.png">
+          </a>
+        </div>
+
+        <button class="nav-close-btn" data-nav-close-btn>
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+
+      </div>
+
+      <ul class="navbar-list">
+
+        <li>
+          <a href="{% url 'home_user' %}" class="navbar-link">Home</a>
+        </li>
+
+        {% if user.id is None %}
+        <li>
+          <a href="{% url 'signup_user' %}" class="navbar-link">Signup</a>
+        </li>
+        {% endif %}
+
+        <li>
+          
+          <a href="{% url 'cart' %}" class="navbar-link">Cart</a>
+          
+        </li>
+
+        <li>
+          <div class="col-lg col-sm col-md col-6 flex-grow-0">
+            <div class="category-wrap dropdown d-inline-block float-right">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> 
+                 All category 
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'store' %}">All Products</a>
+                {% for category in links %}
+                <a class="dropdown-item" href="{{category.get_url}}">{{category.category_name}}</a>
+                {% endfor %}
+              </div>
+            </div>  <!-- category-wrap.// -->
+          </div>
+        </li>
+
+        
+
+        
+
+        
+
+      </ul>
+
+      <ul class="nav-social-list">
+
+        <li>
+          <a href="#" class="social-link">
+            <ion-icon name="logo-twitter"></ion-icon>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" class="social-link">
+            <ion-icon name="logo-instagram"></ion-icon>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" class="social-link">
+            <ion-icon name="logo-github"></ion-icon>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" class="social-link">
+            <ion-icon name="logo-youtube"></ion-icon>
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+    {% if user.id is None %}
+    <div class="header-actions">
+
+      <button class="search">
+        <ion-icon name="search-outline"></ion-icon>
+      </button>
+
+      <a href="{% url 'login' %}">
+        <button class="btn-sign_in">
+
+          <div class="icon-box">
+            <ion-icon name="log-in-outline"></ion-icon>
+          </div>
+
+          <span>Login</span>
+
+        </button>
+      </a>
+    </div>
+    {% else %}
+    <div class="header-actions">
+
+      <button class="search">
+        <ion-icon name="search-outline"></ion-icon>
+      </button>
+
+      <a href="{% url 'logout_user' %}">
+        <button class="btn-sign_in">
+
+          <div class="icon-box">
+            <ion-icon name="log-in-outline"></ion-icon>
+          </div>
+
+          <span>Logout</span>
+
+        </button>
+      </a>
+    </div>
+
+    {% endif %}
+
+  </div>
+
+</header>
+
+
+
+
+        <!-- 
+          - #GEARS
+        -->
+        <div class="section-wrapper" >
+
+      <section class="gears" id="gears" style="
+      padding-top: 10rem;
+      ">
+        <div class="container">
+
+          <h2 class="h2 section-title">check our gears</h2>
+
+          <ul class="gears-list">
+            {% for products in products|slice:":10" %}
+          
+            <li>
+              <div class="gears-card" >
+
+                <div class="card-banner" >
+
+                    <a href="{{ products.get_url }}"> <img src="{{products.pro_image1.url}}" alt=""></a>
+
+                  <button class="share">
+                    <ion-icon name="share-social"></ion-icon>
+                  </button>
+
+                  <div class="card-time-wrapper">
+                    <ion-icon name="time-outline"></ion-icon>
+
+                    <span>In 4 days</span>
+                  </div>
+
+                </div>
+
+                <div class="card-content">
+
+                  <div class="card-title-wrapper">
+
+                    <a href="{{ products.get_url }}"><h3 class="h3 card-title">{{products.product_name_card|slice:":46"}}</h3></a>
+
+
+                  </div>
+
+                  <div class="card-prize">${{products.price}}</div>
+
+                </div>
+
+                <div class="card-actions">
+                  {% if products.stock <= 0  %}
+
+                  <a href="{{ products.get_url }}" class="btn btn-primary">
+                    
+
+                    <span>Out of Stock</span>
+                  </a>
+
+
+                  {% else %}
+                  <a href="{% url 'add-cart' products.id %}" class="btn btn-primary">
+                    <ion-icon name="add-outline"></ion-icon>
+
+                    <span>Add to cart</span>
+                  </a>
+                  {% endif  %}
+                  <button class="btn card-btn">
+                    <ion-icon name="heart-outline"></ion-icon>
+                  </button>
+
+                </div>
+
+              </div>
+            </li>
+
+            {% endfor %}
+
+            
+            
+
+          </ul>
+
+        </div>
+      </section>
+
+
+
+          <nav>
+            <div class="pagination:container">
+              {% if products.has_other_pages %}
+              <ul class="pagination">
+
+            {% if products.has_previous %}
+            <li>
+              <a  class="page-links" href="?page={{ products.previous_page_number }}">
+                <div class="pagination:number arrow">
+                <svg width="18" height="18">
+                  <use xlink:href="#left" />
+                </svg>
+                <span class="arrow:text">Previous</span> 
+              </div>
+            </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+              <a  class="page-links" href="">
+              <div class="pagination:number arrow">
+              <svg width="18" height="18">
+                <use xlink:href="#left" />
+              </svg>
+              <span class="arrow:text">Previous</span> 
+            </div>
+          </a>
+            </li>
+            {% endif %}
+              
+            {% for i in products.paginator.page_range %}
+            {% if products.number == i %}
+            <li>
+            <a class="page-links" href="#">
+              <div class="pagination:number">
+               {{i}}
+              </div>
+            </a>
+            </li>
+            {% else %}
+            <li>
+              <a class="page-links" href="?page={{i}}">
+                <div class="pagination:number">
+                 {{i}}
+                </div>
+              </a>
+              </li>
+            {% endif %}
+            {% endfor %}
+            
+            
+          {% if products.has_next %}
+          <li>
+            <a class="page-links" href="?page={{ products.next_page_number }}">
+              <div class="pagination:number arrow">
+                <svg width="18" height="18">
+                  <use xlink:href="#right" />
+                </svg>
+              </div>
+            </div>
+          </a>
+          </li> 
+          {% else %}
+          <li class="page-item disabled">
+            <div class="pagination:number arrow">
+              <svg width="18" height="18">
+                <use xlink:href="#right" />
+              </svg>
+            </div>
+          </div>
+        </li> 
+        {% endif %}
+
+          </ul>
+          {% endif %}
+            
+            <svg class="hide">
+              <symbol id="left" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></symbol>
+              <symbol id="right" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></symbol>
+            </svg>
+          </nav>
+  
+          <script src="../static/assets/js/script.js"></script>
+
+          <!-- 
+            - ionicon link
+          -->
+          <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+          <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        
+
+
+{% endblock  %}

@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+
+
+
+{% block content %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'dashboard.css' %}">
+
+<div class="container d-flex status">
+<form  method="post" class="status-form">
+    {%csrf_token %}
+<h1>{{form.status}}</h1>
+
+<button type="submit"  class="btn btn-success status-btn" >Update</button>
+
+</form>
+</div>
+
+
+
+
+
+{% endblock %}

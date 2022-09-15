@@ -1,0 +1,392 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'dashboard.css' %}">
+
+
+<div class="container-scroller">
+    <!-- partial:partials/_sidebar.html -->
+    <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+        <a class="sidebar-brand brand-logo" href="index.html"><img src="/static/assets/images/entrega-logo.png" alt="logo" /></a>
+        <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="/static/assets/images/entrega-logo.png" alt="logo" /></a>
+      </div>
+      <ul class="nav">
+        <li class="nav-item menu-items">
+          <a class="nav-link" href="{% url 'admin-home' %}">
+            <span class="menu-icon">
+              <i class="fa fa-home" aria-hidden="true"></i>
+            </span>
+            <span class="menu-title">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item menu-items">
+          <a class="nav-link" href="{% url 'admin-user-list' %}">
+            <span class="menu-icon">
+              <i class="fa fa-users" aria-hidden="true"></i>
+            </span>
+            <span class="menu-title">User Management</span>
+          </a>
+        </li>
+        <li class="nav-item menu-items">
+          <a class="nav-link" href="{% url 'admin-product-list' %}">
+            <span class="menu-icon">
+              <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+            </span>
+            <span class="menu-title">Product Management</span>
+          </a>
+        </li>
+        <li class="nav-item menu-items">
+          <a class="nav-link" href="{% url 'admin-category' %}">
+            <span class="menu-icon">
+              <i class="fa fa-cart-plus" aria-hidden="true"></i>
+            </span>
+            <span class="menu-title">Category Management</span>
+          </a>
+        </li>
+        
+        <li class="nav-item menu-items">
+          <a class="nav-link" href="{% url 'admin-order' %}">
+            <span class="menu-icon">
+              <i class="fa fa-truck" aria-hidden="true"></i>
+            </span>
+            <span class="menu-title">Order Management</span>
+          </a>
+        </li>
+  
+        <li class="nav-item menu-items">
+          <a class="nav-link" href="{% url 'admin-offer' %}">
+            <span class="menu-icon">
+              <i class="fa fa-percent" aria-hidden="true"></i>
+            </span>
+            <span class="menu-title">Offer Management</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_navbar.html -->
+      <nav class="navbar p-0 fixed-top d-flex flex-row">
+        <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
+        </div>
+        <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="mdi mdi-menu"></span>
+          </button>
+          <ul class="navbar-nav w-100">
+            <li class="nav-item w-100">
+              <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                <input type="text" class="form-control" placeholder="Search products">
+              </form>
+            </li>
+          </ul>
+          <ul class="navbar-nav navbar-nav-right">
+            
+            
+            
+            
+            <li class="nav-item dropdown">
+              <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                <div class="navbar-profile">
+                  <!-- <img class="img-xs rounded-circle" src="assets/images/faces/face15.jpg" alt=""> -->
+                  <p class="mb-0 d-none d-sm-block navbar-profile-name">Henry Klein</p>
+                  <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                <h6 class="p-3 mb-0">Profile</h6>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-settings text-success"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject mb-1">Settings</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-logout text-danger"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject mb-1">Log out</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <p class="p-3 mb-0 text-center">Advanced settings</p>
+              </div>
+            </li>
+          </ul>
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-format-line-spacing"></span>
+          </button>
+        </div>
+      </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_navbar.html -->
+      <nav class="navbar p-0 fixed-top d-flex flex-row">
+        <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
+        </div>
+        <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="mdi mdi-menu"></span>
+          </button>
+          <ul class="navbar-nav w-100">
+            <li class="nav-item w-100">
+              <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                <input type="text" class="form-control" placeholder="Search products">
+              </form>
+            </li>
+          </ul>
+          <ul class="navbar-nav navbar-nav-right">
+            
+            
+            
+            
+            <li class="nav-item dropdown">
+              <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                <div class="navbar-profile">
+                  <!-- <img class="img-xs rounded-circle" src="assets/images/faces/face15.jpg" alt=""> -->
+                  <p class="mb-0 d-none d-sm-block navbar-profile-name">Henry Klein</p>
+                  <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                <h6 class="p-3 mb-0">Profile</h6>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-settings text-success"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject mb-1">Settings</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-logout text-danger"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject mb-1">Log out</p>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <p class="p-3 mb-0 text-center">Advanced settings</p>
+              </div>
+            </li>
+          </ul>
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-format-line-spacing"></span>
+          </button>
+        </div>
+      </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:../../partials/_navbar.html -->
+      
+      <!-- partial -->
+            
+
+      {% if messages %}
+      <div class="alert alert-danger mx-auto" role="alert">
+      
+      <div class="messages">
+          {% for message in messages %}
+          <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>        
+          {{ message }}
+      </div>
+          {% endfor %}
+          </div>
+      </div>
+      {% endif %}
+
+      <div class="row" style="width: 100%;">
+          <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
+              <div class="row">
+                  <div class="col-md-8">
+                      <div class="card">
+                          <div class="card-header">
+                              <h4 class="mb-0">Update Category</h4>
+                          </div>
+                          <div class="card-body">
+                              <form method="POST" enctype="multipart/form-data" id="registration_form">
+                                  {% csrf_token %}
+                                  <div class="mb-3">
+                                      <label>Category Name</label>
+                                      {{form.category}}
+                                  </div>
+                                  
+                                  <div class="mb-3">
+                                      <label>Product Name</label>
+                                      {{form.product}}
+                                  </div>
+
+                                  <div class="mb-3" style="color: #000;">
+                                      <label for="address">Discription</label>
+
+                                     {{form.offer}}
+                                      
+                                  </div>
+
+                                  {% if messages %}
+                                <div class="alert alert-danger w-40 mx-auto" role="alert">
+                                
+                                <div class="messages">
+                                    {% for message in messages %}
+                                    <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>        
+                                    {{ message }}
+                                </div>
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                  
+                                 
+                                  
+                              
+                                  <hr class="mb-4">
+                                  <button class="btn btn-primary btn-lg btn-block" type="submit">Add Offer</button>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+                  
+              </div>
+          </div>
+      </div>
+            </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" ></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+
+<!-- crop  -->
+
+<script>
+    
+</script>
+
+<!-- end crop -->
+
+
+<script type="text/javascript">
+
+    $("registration_form"). submit(function(e){
+    e. preventDefault();
+    });
+
+    
+    $(function() {
+
+       $("#fname_error_message").hide();
+       $("#slug_error_message").hide();
+       $("#name_error_message").hide();
+      
+
+
+       var error_fname = false;
+       var error_slug = false;
+       var error_des = false;
+
+       $("#category_name").focusout(function(){
+          check_fname();
+       });
+       $("#slug").focusout(function() {
+          check_slug();
+       });
+       $("#description").focusout(function() {
+            check_name();
+       });
+
+
+
+       
+
+       function check_fname() {
+          
+          var fname = $("#category_name").val();
+          if (fname !== '') {
+             $("#fname_error_message").hide();
+             $("#category_name").css("border-bottom","2px solid #34F458");
+          }else if (fname == ''){
+            $("#fname_error_message").html("Please enter a Category name.");
+             $("#fname_error_message").show();
+             $("#category_name").css("border-bottom","2px solid #F90A0A");
+             error_fname = true;
+          } 
+          else {
+             $("#fname_error_message").html("Please enter a Valid Category name.");
+             $("#fname_error_message").show();
+             $("#category_name").css("border-bottom","2px solid #F90A0A");
+             error_fname = true;
+          }
+       }
+
+       function check_slug() {
+          var pattern = /^[a-z1-9]*$/;
+          var fname = $("#slug").val();
+          if (pattern.test(fname) && fname !== '') {
+             $("#slug_error_message").hide();
+             $("#slug").css("border-bottom","2px solid #34F458");
+          }else if (fname == ''){
+            $("#slug_error_message").html("Please enter slug.");
+             $("#slug_error_message").show();
+             $("#slug").css("border-bottom","2px solid #F90A0A");
+             error_slug = true;
+          } 
+          else {
+             $("#slug_error_message").html("Enter a Valid sulg . Slug should be all small letters");
+             $("#slug_error_message").show();
+             $("#slug").css("border-bottom","2px solid #F90A0A");
+             error_slug = true;
+          }
+       }
+
+
+       
+       
+
+
+
+       $("#registration_form").submit(function() {
+          error_fname = false;
+          error_slug = false;
+          error_des = false;
+
+          check_fname();
+          check_name();
+          check_slug();
+
+          if (error_fname === false && error_slug === false && error_email === false && error_password === false && error_retype_password === false) {
+             
+             return true;
+          } else {
+             alert("Please Fill the form Correctly");
+             return false;
+          }
+
+
+       });
+    });
+ </script>
+{% endblock %}
