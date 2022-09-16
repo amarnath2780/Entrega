@@ -96,11 +96,11 @@ WSGI_APPLICATION = 'entrega.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config('DATABASE_NAME'),
-        'USER' : 'entrega',
-        'PASSWORD': config('PG_PASSWORD'),
-        'HOST' : 'database-1.ctytvgqsjim0.ap-northeast-1.rds.amazonaws.com',
-        'PORT': config('PG_PORT'),
+        'NAME': 'entrega',
+        'USER' : 'postgres',
+        'PASSWORD': 'kali2780',
+        'HOST' : 'database-2.ctytvgqsjim0.ap-northeast-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -202,12 +202,14 @@ TWILIO_SERVICE_SID= config('TWILIO_SERVICE_SID')
 
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+
 
 
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_FILE_OVERWRITE = False
 
-AWS_ACCESS_KEY_ID = 'AKIAZC5ATEZ2XIB7MPGU'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'entrega-bucket'
 
