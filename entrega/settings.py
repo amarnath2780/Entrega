@@ -97,9 +97,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': config('DATABASE_NAME'),
-        'USER' : 'postgres',
+        'USER' : 'entrega',
         'PASSWORD': config('PG_PASSWORD'),
-        'HOST' : config('PG_HOST'),
+        'HOST' : 'database-1.ctytvgqsjim0.ap-northeast-1.rds.amazonaws.com',
         'PORT': config('PG_PORT'),
     }
 }
