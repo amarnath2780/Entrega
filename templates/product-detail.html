@@ -35,88 +35,16 @@
 
         <!-- right navs -->
         <div class="flex items-center justify-between gap-7 relative">
-            <span class="userDropDown flex items-center text-white font-medium gap-1 cursor-pointer">Jhon
+            <span class="userDropDown flex items-center text-white font-medium gap-1 cursor-pointer"><a href="{% url 'home_user' %}" class="navbar-link">Home</a>
                 <span class="material-icons text-sm transition-transform duration-100">expand_more</span>
             </span>
-
-           <!-- dropdown navbar hover tabs -->
-           <div class="userDropDownMenu hidden absolute w-60 -left-24 ml-2 top-9 bg-white shadow-2xl rounded flex-col text-sm">
-               <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50 rounded-t" href="profile.html">
-                    <span class="material-icons md-18 text-primary-blue">account_circle</span>
-                    My Profile
-               </a>
-               <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="#">
-                    <span class="material-icons md-18 text-primary-blue">offline_bolt</span>
-                    Supercoin Zone
-               </a>
-               <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="https://www.flipkart.com/plus/all-offers">
-                    <span class="material-icons md-18 text-primary-blue">add_circle</span>
-                    Flipkart Plus Zone
-               </a>
-               <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="orders.html">
-                    <span class="material-icons md-18 text-primary-blue">shopping_bag</span>
-                    Orders
-               </a>
-               <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="wishlist.html">
-                    <span class="material-icons md-18 text-primary-blue">favorite</span>
-                    Wishlist
-               </a>
-               <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="#">
-                    <span class="material-icons md-18 text-primary-blue">chat</span>
-                    My Chats
-               </a>
-               <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="https://www.flipkart.com/account/rewards">
-                    <span class="material-icons md-18 text-primary-blue">redeem</span>
-                    Coupons
-               </a>
-               <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="#">
-                    <span class="material-icons md-18 text-primary-blue">account_balance_wallet</span>
-                    Gift Cards
-               </a>
-               <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="#">
-                    <span class="material-icons md-18 text-primary-blue">notifications</span>
-                    Notifications
-               </a>
-               <a class="pl-3 py-3.5 flex gap-3 items-center hover:bg-gray-50 rounded-b" href="#">
-                    <span class="material-icons md-18 text-primary-blue">power_settings_new</span>
-                    Logout
-               </a>
-               <div class="absolute right-1/2 -top-2.5">
-                    <div class="arrow_down"></div>
-               </div>
            </div>
            <!-- dropdown navbar hover tabs -->
 
-            <span class="moreDropDown hidden sm:flex items-center text-white font-medium gap-1 cursor-pointer">More
+            <span class="moreDropDown hidden sm:flex items-center text-white font-medium gap-1 cursor-pointer"><a class="" href="{% url 'order-list' %}">My Orders</a>
                 <span class="material-icons text-sm transition-transform duration-100">expand_more</span>
             </span>
 
-            <!-- dropdown navbar hover tabs -->
-            <div class="moreDropDownMenu hidden absolute w-60 -right-2 top-9 bg-white shadow-2xl rounded flex-col text-sm">
-            <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50 rounded-t" href="https://www.flipkart.com/communication-preferences/push">
-                 <span class="material-icons md-18 text-primary-blue">notifications</span>
-                 Notification Preferences
-            </a>
-            <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="https://seller.flipkart.com/sell-online">
-                 <span class="material-icons md-18 text-primary-blue">business_center</span>
-                 Sell on Flipkart
-            </a>
-            <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="https://www.flipkart.com/helpcentre">
-                 <span class="material-icons md-18 text-primary-blue">live_help</span>
-                 24x7 Customer Care
-            </a>
-            <a class="pl-3 py-3.5 border-b flex gap-3 items-center hover:bg-gray-50" href="https://advertising.flipkart.com">
-                 <span class="material-icons md-18 text-primary-blue">trending_up</span>
-                 Advertise
-            </a>
-            <a class="pl-3 py-3.5 flex gap-3 items-center hover:bg-gray-50 rounded-b" href="https://www.flipkart.com/mobile-apps">
-                 <span class="material-icons md-18 text-primary-blue">download</span>
-                 Download App
-            </a>
-            <div class="absolute right-1/2 -top-2.5">
-                 <div class="arrow_down"></div>
-            </div>
-            </div>
             <!-- dropdown navbar hover tabs -->
 
             <a href="{% url 'cart' %}" class="flex items-center text-white font-medium gap-2 relative">
@@ -353,70 +281,7 @@
             <!-- specifications border box -->
 
             <!-- specifications border box -->
-            <div class="w-full mt-4 pb-4 rounded-sm border flex flex-col">
-                <h1 class="px-6 py-4 border-b text-2xl font-medium">Review and Rating</h1>
-
-
-                <!-- specs list -->
-                <form action="{% url 'submit-review' single_product.id %}" method="POST">
-
-                    {% csrf_token %}
-                    <h5> <u> Write your review</u></h5>
-
-                    <div>
-                        <!-- Rating stars -->
-                        <label for="">How do you rate this product?</label>
-                        <br>
-
-                        <div class="rate">
-                            <input type="radio" name="rating" value="5" id="rating10"><label for="rating10" title="5" ></label>
-                            <input type="radio" name="rating" value="4.5" id="rating9"><label for="rating9" title="4.5" class="half" ></label>
-                            <input type="radio" name="rating" value="4" id="rating8"><label for="rating8" title="4" ></label>
-                            <input type="radio" name="rating" value="3.5" id="rating7"><label for="rating7" title="3.5"class="half" ></label>
-                            <input type="radio" name="rating" value="3" id="rating6"><label for="rating6" title="3" ></label>
-                            <input type="radio" name="rating" value="2.5" id="rating4.5"><label for="rating5" title="2.5" class="half" ></label>
-                            <input type="radio" name="rating" value="2" id="rating4"><label for="rating4" title="2" ></label>
-                            <input type="radio" name="rating" value="1.5" id="rating3"><label for="rating3" title="1.5"class="half" ></label>
-                            <input type="radio" name="rating" value="1" id="rating2"><label for="rating2" title="1" ></label>
-                            <input type="radio" name="rating" value="0.5" id="rating1"><label for="rating1" title="0.55" class="half" ></label>
-
-                        </div>
-                        <br>
-
-                        <label for="">Review Title:</label>
-                        <input type="text" name="subject" id="" class="form-control">
-                        <br>
-                        <label for="">Review</label>
-                        <textarea name="review" id="" class="form-control" rows="4"></textarea>
-                        <br>
-                        {% if user.is_authenticated %}
-                        <input type="submit" name="" class="btn btn-light text-dark" value="Submit" id="">
-                        {% else %}
-                        
-                        <p>You much be logged in to post a review . <span><a href="{% url 'login' %}" >Login Now</a></span></p>
-
-                        {% endif %}
-
-
-                        {% if messages %}
-                        <div class="alert alert-success w-40 mx-auto" role="alert">
-                        
-                        <div class="messages">
-                        {% for message in messages %}
-                        <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>        
-                        {{ message }}
-                         </div>
-                        {% endfor %}
-                        </div>
-                        </div>
-                        {% endif %}
-
-                    </div>
-
-                </form>
-                <!-- specs list -->
-
-            </div>
+            
             <!-- specifications border box -->
             
         </div>
