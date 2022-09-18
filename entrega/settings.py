@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-)v%_hqk6rsr!xo3l!t0oyqp-gtavi!62^(y*+=%vlfv5o(762d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = Falsecd 
 
 ALLOWED_HOSTS = ['*']
 
@@ -201,14 +201,29 @@ TWILIO_SERVICE_SID= config('TWILIO_SERVICE_SID')
 
 
 
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+""" STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+ """
 
 
-
-AWS_QUERYSTRING_AUTH = False
-AWS_S3_FILE_OVERWRITE = False
+""" AWS_QUERYSTRING_AUTH = False
+AWS_S3_FILE_OVERWRITE = False """
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'entrega'
 
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl':'max-age=86400',
+}
+AWS_S3_FILE_OVERWRITE = True
+AWS_DEFAULT_ACL = 'public-read'
+AWS_LOCATION = 'static'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATICFILES_DIRS=[
+#     'static',
+# ]
+STATIC_URL = 'http://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+DEFAULT_FILE_STORAGE = 'books_com.storage_backends.MediaStorage'
