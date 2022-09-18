@@ -93,14 +93,21 @@ WSGI_APPLICATION = 'entrega.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-DATABASES = {
+""" DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'dbentrega',
         'USER' : 'entrega',
         'PASSWORD': 'kali2780',
-        'HOST' : 'database-1.cqhs5tlcqdem.us-east-1.rds.amazonaws.com',
-        'PORT': '5432',
+        'HOST' : 'database-3.c5n9oxss7kpa.ap-south-1.rds.amazonaws.com',
+        'PORT': '8000',
+    }
+} """
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
