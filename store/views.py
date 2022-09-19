@@ -70,7 +70,7 @@ def store(request , category_slug = None):
     else:
         products = Products.objects.all().filter(is_available = True).order_by('id')
         page = request.GET.get('page')
-        paginator = Paginator(products , 1)
+        paginator = Paginator(products , 3)
         paged_product = paginator.get_page(page)
 
     
