@@ -7,11 +7,13 @@
 
 
 <div class="upper">
+    {% for logo in logo %}
     <div class="logo">
-        <a href="#">
-            <img src="../static/img/logo2.svg" class="img-logo"/>
-        </a>
+      <a href="#" >
+        <img src="{{logo.image.url}}">
+      </a>
     </div>
+    {% endfor %}
     
     <div class="login-div">
         <form class="login" method="POST" id="registration_form" >

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Account
+from .models import Account, Offer, Turno
 
 
 
@@ -16,3 +16,15 @@ class AccountAdmin(admin.ModelAdmin):
     
     
 admin.site.register(Account,AccountAdmin)
+
+
+
+class OfferAdmin(admin.ModelAdmin):
+    model = Offer
+    list_display = ('name' , 'image')
+
+class TurnoAdmin(admin.ModelAdmin):
+    model = Turno
+    list_display = ('name' , 'image')
+admin.site.register(Offer, OfferAdmin)
+admin.site.register(Turno, TurnoAdmin)

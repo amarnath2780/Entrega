@@ -23,8 +23,12 @@
 
         <!-- logo & search container -->
         <div class="flex items-center flex-1">
-        <a class="h-7 mr-4" href="/Flipkart/public/index.html">
-            <img class="h-full w-full object-contain" src="/static/assets/images/entrega-logo.png" alt="">
+        <a class="h-7 mr-4" href="">
+            {% for logo in logo %}
+
+            <img class="h-full w-full object-contain" src="{{logo.image.url}}" alt="">
+
+            {% endfor %}
         </a>
 
         <!-- search container -->

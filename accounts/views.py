@@ -1,10 +1,11 @@
+from unicodedata import name
 from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from cart.models import AddressUser, Cart, CartItem
-from advertisemennt.models import Add, IconAdd
+from advertisemennt.models import Add, IconAdd, Logo
 from .forms import AddAdddressForm, RegistrationForm
-from .models import Account
+from .models import Account, Offer, Turno
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.sites.shortcuts import get_current_site
@@ -46,11 +47,17 @@ def change_password(request):
         else:
             messages.error(request , 'Passwords does not match')
             return redirect(change_password)
-        print(user)
+        
+
+    logo = Logo.objects.all()
+
+    context = {
+        'logo' : logo,
+    }
 
 
 
-    return render(request , 'authentication/change-password.html')
+    return render(request , 'authentication/change-password.html' , context)
 
 
 
@@ -157,11 +164,28 @@ def user_home(request):
     products = Products.objects.all().filter(is_available = True)
     add = Add.objects.all()
     icon = IconAdd.objects.all()
+    logo = Logo.objects.all()
+    char_1 = Offer.objects.get(name = 'character-1')
+    char_2 = Offer.objects.get(name = 'character-2')
+    char_3 = Offer.objects.get(name = 'character-3')
+    about = Offer.objects.get(name = 'about')
+    prize = Turno.objects.get(name= 'prize')
+    winner_1 = Turno.objects.get(name= 'winner-1')
+    winner_2 = Turno.objects.get(name= 'winner-2')
     context = {
         'products':products,
         'add' : add,
-        'icon': icon
+        'icon': icon,
+        'logo' : logo,
+        'char_1' :char_1,
+        'char_2' :char_2,
+        'char_3' :char_3,
+        'about' : about,
+        'prize' : prize,
+        'winner_1' : winner_1,
+        'winner_2' : winner_2,
     }
+
 
     return render(request, 'home.html',context )
 

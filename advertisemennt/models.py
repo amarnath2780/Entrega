@@ -1,4 +1,5 @@
 from pydoc import describe
+from tkinter.tix import Tree
 from tokenize import Triple
 from django.db import models
 
@@ -18,4 +19,8 @@ class IconAdd(models.Model):
     image  = models.ImageField(upload_to = 'images/add')
     description = models.TextField(blank=True)
 
+
+class Logo(models.Model):
+    name = models.CharField(max_length=20 , blank=True)
+    image = models.ImageField(upload_to = 'images/logo')
 

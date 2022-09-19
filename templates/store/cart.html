@@ -53,7 +53,7 @@ background: url(/static/assets/images/section-wrapper-bg.jpg);
 	
 		  <div class="logo">
 			<a href="#" >
-			  <img src="/static/assets/images/entrega-logo.png">
+			  <img src="{{logo.image.url}}">
 			</a>
 		  </div>
 	
@@ -67,7 +67,7 @@ background: url(/static/assets/images/section-wrapper-bg.jpg);
 	
 			  <div class="logo">
 				<a href="#" >
-				  <img src="/static/assets/images/entrega-logo.png">
+				  <img src="{{logo.image.url}}">
 				</a>
 			  </div>
 	
@@ -222,7 +222,7 @@ background: url(/static/assets/images/section-wrapper-bg.jpg);
 								<i class="fa fa-minus"></i>
 							</a>
 							</div> 
-							<input type="text" class="form-control disabled" id="input-value" value="{{cart_item.quantity}}" style="width: 0rem;">
+							<input type="text" class="form-control disabled" id="input-value" value="{{cart_item.quantity}}" style="width: 0rem;text-align: center;">
 							<div class="input-group-append">
 							<a  
 								hx-get = "{% url 'add-cart' cart_item.product.id %}"

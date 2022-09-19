@@ -1,6 +1,6 @@
 from audioop import add
 from django.contrib import admin
-from .models import Add , IconAdd
+from .models import Add , IconAdd, Logo
 
 # Register your models here.
 
@@ -13,5 +13,10 @@ class IconAddAdmin(admin.ModelAdmin):
     model: IconAdd
     list_display = ('name' , 'image')
 
+class LogoAdmin(admin.ModelAdmin):
+    model: Logo
+    list_display = ('name' , 'image')
+
 admin.site.register(Add,AddAdmin)
 admin.site.register(IconAdd , IconAddAdmin)
+admin.site.register(Logo, LogoAdmin)
