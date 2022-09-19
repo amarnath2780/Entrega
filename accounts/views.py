@@ -166,7 +166,7 @@ def user_home(request):
     products = Products.objects.all().filter(is_available = True)
     add = Add.objects.all()
     icon = IconAdd.objects.all()
-    logo = Logo.objects.all()
+    logo = Logo.objects.get(name = 'entrega')
     char_1 = Offer.objects.get(name = 'character-1')
     char_2 = Offer.objects.get(name = 'character-2')
     char_3 = Offer.objects.get(name = 'character-3')

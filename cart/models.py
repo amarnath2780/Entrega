@@ -59,3 +59,6 @@ class AddressUser(models.Model):
         return f"{self.address1}, {self.address2}"
 
     
+class CartEmpty(models.Model):
+    name = models.CharField(max_length=200, blank=True)
+    image = models.ImageField(upload_to = 'images/empty')

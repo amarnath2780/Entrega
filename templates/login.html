@@ -9,14 +9,14 @@
 
 
 <div class="upper">
-    {% for logo in logo %}
-    <div class="logo">
+    <div class="logo" style="
+        display: flex;
+    justify-content: center;">
       <a href="#" >
         <img src="{{logo.image.url}}">
       </a>
     </div>
-    {% endfor %}
-    </div>
+
     <div class="login-div">
         <form class="login" method="POST" id="registration_form">
 

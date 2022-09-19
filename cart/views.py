@@ -2,7 +2,7 @@ from math import prod
 from django.shortcuts import render , redirect,get_object_or_404
 from accounts.models import Offer
 from cart.forms import AddressForm
-from cart.models import AddressUser, Cart, CartItem
+from cart.models import AddressUser, Cart, CartEmpty, CartItem
 from store.models import Products, variation
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
@@ -258,12 +258,17 @@ def carts(request, total=0, cart_items=None, quantity=0):
     tax_amount = round(float(total) * float(0.5/100),2)
     sub_total = round(float(total)+tax_amount, 2)
     logo = Logo.objects.get(name = 'entrega')
+    cartempty = CartEmpty.objects.get(name = 'cart')
     context = {
         'total':total ,
         'quantity': quantity ,
         'cart_items' : cart_items,
         'tax_amount' : tax_amount ,
         'sub_total' : sub_total ,
-        'logo' :logo
+        'logo' :logo,
+        'cartempty' : cartempty,
     }
     return render(request, 'store/cart.html', context)  
+
+
+
