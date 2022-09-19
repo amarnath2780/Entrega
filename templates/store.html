@@ -15,13 +15,11 @@
 
   <div class="container">
 
-    {% for logo in logo %}
     <div class="logo">
       <a href="#" >
         <img src="{{logo.image.url}}">
       </a>
     </div>
-    {% endfor %}
 
     <button class="nav-open-btn" data-nav-open-btn>
       <ion-icon name="menu-outline"></ion-icon>
@@ -31,13 +29,11 @@
 
       <div class="navbar-top">
 
-        {% for logo in logo %}
         <div class="logo">
           <a href="#" >
             <img src="{{logo.image.url}}">
           </a>
         </div>
-        {% endfor %}
 
         <button class="nav-close-btn" data-nav-close-btn>
           <ion-icon name="close-outline"></ion-icon>
