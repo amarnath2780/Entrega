@@ -59,7 +59,7 @@ def submit_review(request , product_id):
 def store(request , category_slug = None):
     categories = None
     products = None
-    logo = Logo.objects.get(name = 'engrega')
+    logo = Logo.objects.get(name = 'entrega')
 
     if category_slug != None:
         categories = get_object_or_404(Category , slug = category_slug)
