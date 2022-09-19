@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from advertisemennt.models import Logo
 from order.models import Order, OrderProduct, Payment
 from store.models import Offers, Products
 from django.contrib import messages
@@ -65,13 +66,14 @@ def offer_add(request):
             print('offer is not valid')
             messages.error(request, 'Please check the details')
             return redirect(offer_add)
-
+    logo = Logo.objects.get(name='entrega')
     category = Category.objects.all()
     product = Products.objects.all()
     context = {
         'form' : form,
         'category' : category,
         'product' : product,
+        'logo':logo,
     }
     return render(request , 'superuser/admin-offer-add.html' , context)
 
@@ -98,9 +100,10 @@ def offer_delete(request , id):
 def offer(request):
 
     offer = Offers.objects.all()
-
+    logo = Logo.objects.get(name='entrega')
     context = {
         'offer' : offer,
+        'logo':logo,
     }
 
 
@@ -142,9 +145,11 @@ def admin_update_status(request , id ):
         print('Form is Not Valid')
         messages.error(request , 'Details is not valid please check it!!')
 
+    logo = Logo.objects.get(name='entrega')
     context = {
         'form' : form,
         'status': status,
+        'logo':logo,
     }
 
     return render(request , 'superuser/admin-status.html' ,context)
@@ -162,10 +167,11 @@ def admin_order(request):
 
     
 
-
+    logo = Logo.objects.get(name='entrega')
     context = {
         'order_product' : order_product,
         'sub_total'     : sub_total,
+        'logo' :logo
 
     }
 
@@ -179,9 +185,10 @@ def admin_order(request):
 @login_required(login_url='admin-login')
 def admin_product_list(request):
     product = Products.objects.all()
-
+    logo = Logo.objects.get(name='entrega')
     context = {
         'product' : product,
+        'logo' : logo
     }
 
     return render(request , 'superuser/admin-product-list.html' , context)
@@ -203,6 +210,7 @@ def admin_category_add(request):
 
     form = CategoryForm()
     category = Category.objects.all()
+    
     context = {
         'form' : form,
         'category': category

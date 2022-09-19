@@ -49,7 +49,7 @@ def change_password(request):
             return redirect(change_password)
         
 
-    logo = Logo.objects.all()
+    logo = Logo.objects.get(name='entrega')
 
     context = {
         'logo' : logo,
@@ -132,8 +132,10 @@ def register_user_phone(request):
             messages.error(request, 'Invalid credentials..')
     else:
         form = RegistrationForm()
+    logo = Logo.objects.get(name='entrega')
     context = {
-        'form' : form
+        'form' : form,
+        'logo' : logo,
     }
     return render(request, 'signup-phone.html',context)
 
@@ -242,8 +244,10 @@ def register_user(request):
             return redirect(register_user)
     else:
         form = RegistrationForm()
+    logo = Logo.objects.get(name='entrega')
     context = {
-        'form' : form
+        'form' : form,
+        'logo' : logo
     }
     return render(request, 'signup.html',context)
 
@@ -281,8 +285,14 @@ def login_user(request):
                 messages.error(request, 'Email is not verified. Please check your inbox..')
            
         else:
-            messages.error(request, 'Invalid Credentials!')        
-    return render(request,'login.html')
+            messages.error(request, 'Invalid Credentials!')   
+
+    logo = Logo.objects.get(name='entrega')
+
+    context = {
+        'logo' :logo
+    }     
+    return render(request,'login.html' , context)
 
 def logout_user(request):
     if request.user.is_authenticated:
@@ -323,8 +333,12 @@ def forgot_password(request):
         else:
             messages.error(request , 'Account does not exist')
             return redirect(forgot_password)
+    logo = Logo.objects.get(name='entrega')
 
-    return render(request , 'authentication/forgot_password.html')
+    context = {
+        'logo' : logo,
+    }
+    return render(request , 'authentication/forgot_password.html' , context)
 
 
 

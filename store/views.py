@@ -59,6 +59,7 @@ def submit_review(request , product_id):
 def store(request , category_slug = None):
     categories = None
     products = None
+    logo = Logo.objects.get(name = 'entrega')
 
     if category_slug != None:
         categories = get_object_or_404(Category , slug = category_slug)
@@ -75,6 +76,7 @@ def store(request , category_slug = None):
     
     context = {
         'products':paged_product,
+        'logo' : logo,
         
     }
     return render(request , 'store.html', context)
@@ -85,7 +87,7 @@ def store(request , category_slug = None):
 
 def product_details(request , category_slug , product_slug):
     try:
-        logo = Logo.objects.all()
+        logo = Logo.objects.get(name = 'entrega')
         products = Products.objects.all().filter(is_available = True)
         single_product = Products.objects.get(category__slug= category_slug  , slug=product_slug)
         in_cart = CartItem.objects.filter(cart__cart_id = _cart_id(request) , product = single_product).exists()

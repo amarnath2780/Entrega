@@ -1,5 +1,6 @@
 from unicodedata import category
 from django.shortcuts import render,redirect
+from advertisemennt.models import Logo
 from cart.models import AddressUser, CartItem , Cart
 from category.models import Category
 from order.forms import OrderForm
@@ -43,7 +44,7 @@ def order_list(request):
     order = Order.objects.all().filter(user= current_user)
 
     order_count = order_product.count()
-
+    logo = Logo.objects.get(name='entrega')
 
     sub_total = 0 
     
@@ -59,6 +60,7 @@ def order_list(request):
         'sub_total' : sub_total,
         'orders' :order,
         'order_count' : order_count,
+        'logo':logo,
     }
 
     return render(request , 'order/order.html' , context)
