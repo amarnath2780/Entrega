@@ -12,6 +12,7 @@
     <!-- custom build css -->
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    {% block title %}{{single_product.product_name_card}}{% endblock %}
 </head>
 
 {% block content %}

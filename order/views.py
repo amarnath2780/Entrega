@@ -16,6 +16,7 @@ from store.models import Offers, Products
 from datetime import date
 
 
+
 # Create your views here.
 
 
@@ -227,11 +228,11 @@ def place_order(request , total=0, quantity=0):
     tax = 0
 
     for cart_item in cart_items:
-        total += (cart_item.product.price * cart_item.quantity) 
+        total += float((cart_item.product.price * cart_item.quantity)/80) 
         quantity += cart_item.quantity
         
-    tax = (2 * total)/100
-    grand_total = total + tax 
+    tax = float(((2 * total)/100)/80)
+    grand_total = int((float(total) + (tax)))
 
     try:
         offer = Offers.objects.get(category = category)
@@ -240,7 +241,7 @@ def place_order(request , total=0, quantity=0):
         discount = 0 
 
     
-    totaly = (grand_total-(discount/100))
+    totaly = ((grand_total)-(discount/100))
 
     print(totaly)
 
@@ -380,6 +381,7 @@ def place_order(request , total=0, quantity=0):
                 'tax' : tax,
                 'grand_total' : grand_total,
                 'discount' : discount,
+                'totaly' : totaly,
                 'address' : address,
                 'payment' : payment ,
                 'payment_type': payment_type,

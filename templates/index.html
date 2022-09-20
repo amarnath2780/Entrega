@@ -21,7 +21,7 @@
 
    
 
-    <title>Hello, world!</title>
+    <title>{% block title %} {% endblock %}</title>
   </head>
   <body>
     
@@ -38,7 +38,7 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js" integrity="sha512-ooSWpxJsiXe6t4+PPjCgYmVfr1NS5QXJACcR/FPpsdm6kqG1FmQ2SVyg2RXeVuCRBLr0lWHnWJP6Zs1Efvxzww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{% static 'script.js' %}"></script>
-    <script src="/static/assets/js/script.js"></script>
+    <script src="{% static 'nav-bar.js' %}"></script>
     <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
     
 

@@ -1,5 +1,7 @@
 {% extends 'store/base.html' %}
 {% block content %}
+{% block title %}Payment{% endblock %}
+
 <div class="container">
     <button id="pay-btn" class="btn" value="{{razorpay_amount}}">Pay now</button>
 </div>

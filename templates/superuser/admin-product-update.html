@@ -4,6 +4,7 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+{% block title %}Admin{% endblock %}
 
 
 <div class="container-scroller">
@@ -146,6 +147,13 @@
                                     <div class="card-header">
                                         <h4 class="mb-0">Update Product</h4>
                                     </div>
+
+                                    {% for message in messages %}
+                                    <div class="">
+                                      <strong style="color: #ed0e25 ; "> {{message}} </strong>
+                                    </div>
+                                    {% endfor %}
+
                                     <div class="card-body">
                                         <form method="POST" id="registration_form" enctype="multipart/form-data">
                                             {% csrf_token %}
@@ -183,34 +191,34 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3">
-                                              <label for="address">Discription</label>
+                                              <label for="address">Discription in box one</label>
                                               {{form.product_discription1}}
                                             </div>
                                             <div class="mb-3">
-                                              <label for="address">Discription</label>
+                                              <label for="address">Discription in box two</label>
                                               {{form.product_discription2}}
                                             </div>
                                             <div class="mb-3">
-                                                <label for="address">Product Hilights</label>
+                                                <label for="address">product highlight one</label>
                                                 {{form.product_highlights}}
                                                 <div class="invalid-feedback">
                                                     Please enter your shipping address.
                                                 </div>
                                             </div>
                                             <div class="mb-3">
-                                              <label for="address">Product Hilights</label>
+                                              <label for="address">product highlight two</label>
                                               {{form.product_highlights1}}
                                             </div>
                                             <div class="mb-3">
-                                              <label for="address">Product Hilights</label>
+                                              <label for="address">product highlight three</label>
                                               {{form.product_highlights2}}
                                             </div>
                                             <div class="mb-3">
-                                              <label for="address">Product Hilights</label>
+                                              <label for="address">product highlight four</label>
                                               {{form.product_highlights3}}
                                             </div>
                                             <div class="mb-3">
-                                              <label for="address">Product Hilights</label>
+                                              <label for="address">product highlight five</label>
                                               {{form.product_highlights4}}
                                             </div>
                                             <div class="row">
@@ -234,11 +242,7 @@
                                             <div class="row">
                                                 <div class="col-md-8 mb-3">
                                                     <label for="country">Number of  Stock Available</label>
-                                                    <input type="text" class="form-control" id="stock" name="stock" placeholder="Stock" />
-                                                    <div class="warning-input" id="stock_error_message">
-                                                        Please conform your password
-                                                        
-                                                    </div>
+                                                    {{form.stock}}
                                                 </div>
                                                 </div>
                                             </div>
@@ -501,7 +505,7 @@
              
              return true;
           } else {
-             alert("Please Fill the form Correctly");
+             
              return false;
           }
 

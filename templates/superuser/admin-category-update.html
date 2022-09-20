@@ -1,5 +1,6 @@
 {% extends 'index.html' %}
 
+{% block title %}Admin{% endblock %}
 
 {% block content %}
 {% load static %}
@@ -138,18 +139,7 @@
       <!-- partial -->
             
 
-      {% if messages %}
-      <div class="alert alert-danger mx-auto" role="alert">
-      
-      <div class="messages">
-          {% for message in messages %}
-          <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>        
-          {{ message }}
-      </div>
-          {% endfor %}
-          </div>
-      </div>
-      {% endif %}
+     
 
       <div class="row" style="width: 100%;">
           <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -164,24 +154,22 @@
                                   {% csrf_token %}
                                   <div class="mb-3">
                                       <label>Category Name</label>
-                                      <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Category Name" />
-                                      <div class="warning-input" id="fname_error_message">
-                                          Please conform your password
-                                          
+                                      <div >
+                                        {{form.category_name}}
                                       </div>
+                                     
                                   </div>
                                   </div>
                                   <div class="mb-3 pl-3">
                                       <label>Slug</label>
-                                      <input type="text" class="form-control" id="slug" name="slug" placeholder="Slug" />
-                                      <div class="warning-input" id="slug_error_message">
-                                          Please conform your password
-                                          
+                                      <div  >
+                                      {{form.slug}}
                                       </div>
+                                      
                                   </div>
                                   <div class="mb-3 pl-3">
                                       <label for="address">Discription</label>
-                                      <input type="" class="form-control" id="description" name="description" placeholder="Description" />
+                                        {{form.description}}
                                       <div class="warning-input" id="name_error_message">
                                           Please conform your password
                                           
@@ -198,6 +186,15 @@
                                           </div>
                                       </div>
                                   </div>
+
+                                  {% if messages %}     
+                                    <div class="messages">
+                                        {% for message in messages %}
+                                        <strong style="color: #ed0e25 ; "> {{message}} </strong>
+                                    </div>
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
                                   
                                   <hr class="mb-4 pl-3">
                                   <button class="btn btn-primary btn-lg btn-block" type="submit">Update Product</button>

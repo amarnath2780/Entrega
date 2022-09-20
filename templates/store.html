@@ -4,7 +4,7 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'home.css' %}">
-
+{% block title %}Store{% endblock %}
 
 <header class="header">
 
@@ -182,9 +182,7 @@
 
                     <a href="{{ products.get_url }}"> <img src="{{products.pro_image1.url}}" alt=""></a>
 
-                  <button class="share">
-                    <ion-icon name="share-social"></ion-icon>
-                  </button>
+                  
 
                   <div class="card-time-wrapper">
                      
@@ -202,7 +200,7 @@
 
                   </div>
 
-                  <div class="card-prize">${{products.price}}</div>
+                  <div class="card-prize">₹{{products.price}}</div>
 
                 </div>
 
@@ -223,9 +221,7 @@
                     <span>Add to cart</span>
                   </a>
                   {% endif  %}
-                  <button class="btn card-btn">
-                    <ion-icon name="heart-outline"></ion-icon>
-                  </button>
+                  
 
                 </div>
 

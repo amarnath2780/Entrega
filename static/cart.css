@@ -49,9 +49,6 @@ body {
     background-color: #4466f2!important;
     border-color: #4466f2!important;
 }
-section.section-content.padding-y.bg {
-    padding-top: 15%;
-  }
 
 
 #card-box{
@@ -86,3 +83,13 @@ section.section-content.padding-y.bg {
     color: #ffff;
 }
 
+.cart-headder h2{
+    text-align: center;
+    font-size: 4rem;
+    color: #fff;
+    font-style: italic;
+    font-weight: bolder;
+}
+.navbar .cart-content-in img{
+    width: 10rem;
+}

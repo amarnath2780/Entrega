@@ -1,5 +1,6 @@
 {% extends 'index.html' %}
 
+{% block title %}Admin{% endblock %}
 
 {% block content %}
 {% load static %}
@@ -136,16 +137,12 @@
       <!-- partial:../../partials/_navbar.html -->
       
       <!-- partial -->
-      {% if messages %}
-                <div class="alert alert-danger mx-auto" role="alert">
-                
+                {% if messages %}     
                 <div class="messages">
                     {% for message in messages %}
-                    <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>        
-                    {{ message }}
+                    <strong style="color: #ed0e25 ; "> {{message}} </strong>
                 </div>
                     {% endfor %}
-                    </div>
                 </div>
                 {% endif %}
 
@@ -186,7 +183,7 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="address">Discription</label>
+                                                <label for="address">Discription in box one</label>
                                                 <input type="text" class="form-control" id="product_discription" name="product_discription" placeholder="Product Discription" />
                                                 <div class="warning-input" id="desc_error_message">
                                                     Please conform your password
@@ -194,39 +191,39 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3">
-                                              <label for="address">Discription</label>
+                                              <label for="address">Discription in box two</label>
                                               <input type="text" class="form-control" id="product_discription1" name="product_discription1" placeholder="Product Discription" />
                                           </div>
                                           <div class="mb-3">
-                                            <label for="address">Discription</label>
+                                            <label for="address">Discription in box three</label>
                                             <input type="text" class="form-control" id="product_discription2" name="product_discription2" placeholder="Product Discription" />
                                         </div>
                                         <div class="mb-3">
-                                            <label for="address">Product highlights</label>
+                                            <label for="address">Product highlights one</label>
                                             {{form.product_highlights}}
                                             
                                         </div>
 
                                         <div class="mb-3">
-                                          <label for="address">Product highlights</label>
+                                          <label for="address">Product highlights Two</label>
                                           {{form.product_highlights1}}
                                           
                                       </div>
 
                                       <div class="mb-3">
-                                        <label for="address">Product highlights</label>
+                                        <label for="address">Product highlights Three</label>
                                         {{form.product_highlights2}}
                                         
                                     </div>
 
                                     <div class="mb-3">
-                                      <label for="address">Product Hilihighlightsghts</label>
+                                      <label for="address">Product highlights four</label>
                                       {{form.product_highlights3}}
                                       
                                   </div>
 
                                   <div class="mb-3">
-                                    <label for="address">Product highlights</label>
+                                    <label for="address">Product highlights five</label>
                                     {{form.product_highlights4}}
                                     
                                 </div>

@@ -240,7 +240,7 @@ def register_user(request):
             send_verification_mail(request,user)
             return render(request, 'authentication/send-msg.html',{'user':user})     
         else:
-            messages.error(request, 'Invalid credentials..')
+            messages.error(request, 'Accound already exists..')
             return redirect(register_user)
     else:
         form = RegistrationForm()
@@ -282,10 +282,11 @@ def login_user(request):
                 login(request,user)
                 return redirect(user_home) 
             else:
-                messages.error(request, 'Email is not verified. Please check your inbox..')
-           
+                messages.error(request, 'Your account is not varified!')   
+                return redirect(login_user)   
         else:
-            messages.error(request, 'Invalid Credentials!')   
+            messages.error(request, 'Invalid Username or Password')
+            return redirect(login_user)  
 
     logo = Logo.objects.get(name='entrega')
 

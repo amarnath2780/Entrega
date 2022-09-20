@@ -1,13 +1,12 @@
 {% extends 'nav.html' %}
 
 
-{% block title %}
-	User Address
-{% endblock title %}
-
+{% block title %}Address{% endblock %}
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'address.css' %}">
+
+
 <div class="page-content" style="
 background: url(/static/assets/images/section-wrapper-bg.jpg);
 ">
@@ -174,6 +173,6 @@ background: url(/static/assets/images/section-wrapper-bg.jpg);
         </div><!-- End .dashboard -->
     </div><!-- End .page-content -->
 </div>
-<script src="/static/assets/js/script.js"></script>
+<script src="{% static 'nav-bar.js' %}"></script>
 {% endblock content %}
     

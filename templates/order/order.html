@@ -5,6 +5,7 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'cart.css' %}">
 <link rel="stylesheet" href="{% static 'home.css' %}">
+{% block title %}Order{% endblock %}
 
 <!-- jQuery -->
 <script src="/static/cart/jquery-2.0.0.min.js" type="text/javascript"></script>
@@ -180,7 +181,7 @@ $(document).ready(function() {
 </div> <!-- container .//  -->
 </section>
 
-<script src="/static/assets/js/script.js"></script>
+<script src="{% static 'nav-bar.js' %}"></script>
 <!-- ========================= SECTION CONTENT END// ========================= -->
 </body>
 

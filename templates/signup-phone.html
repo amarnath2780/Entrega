@@ -4,6 +4,7 @@
 
 {% load static %}
 <link rel="stylesheet" href="{% static 'signup.css' %}">
+{% block title %}Signup{% endblock %}
 
 
 <div class="upper">
@@ -22,6 +23,13 @@
                 </a>
             </div>
             <br>
+
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong style="color: #ed0e25 ; "> {{message}} </strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
 
             {% csrf_token %}
             

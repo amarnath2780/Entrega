@@ -6,6 +6,7 @@
 
 {% load static %}
 <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+{% block title %}Admin{% endblock %}
 
 
 <div class="container-scroller">
@@ -148,6 +149,7 @@
                   <div class="card-body">
                     <p class="card-description"> <code>Product details</code>
                     </p>
+                    <a href="{% url 'admin-add-product' %}" class="btn btn-success mt-4 mb-3">Add Product</a>
                     <div class="table-responsive">
                       <table class="table table-dark">
                         <thead>
@@ -215,7 +217,7 @@
                         
                       </table>
                     </div>
-                    <a href="{% url 'admin-add-product' %}" class="btn btn-success mt-4">Add Product</a>
+                    
                   </div>
                   
             

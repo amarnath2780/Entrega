@@ -1,4 +1,5 @@
 {% extends 'nav.html' %}
+{% block title %}Home{% endblock %}
 
 
 {% block content %}
@@ -12,7 +13,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Poppins:wght@400;500;700&display=swap"
     rel="stylesheet">
-
+    
 
 
 <body id="top" style="
@@ -134,7 +135,7 @@ background: url(/static/assets/images/section-wrapper-bg.jpg);
 
               <h2 class="h3 tournament-prize-title">Prize pool</h2>
 
-              <data value="80000">$80000</data>
+              <data value="80000">₹ 80000</data>
 
               
                 <img src="{{prize.image.url}}" alt="Prize image">
@@ -263,9 +264,7 @@ background: url(/static/assets/images/section-wrapper-bg.jpg);
 
                       <a href="{{ products.get_url }}"> <img src="{{products.pro_image1.url}}" alt=""></a>
 
-                    <button class="share">
-                      <ion-icon name="share-social"></ion-icon>
-                    </button>
+                    
 
                     <div class="card-time-wrapper">
                       
@@ -466,7 +465,7 @@ background: url(/static/assets/images/section-wrapper-bg.jpg);
   <!-- 
     - custom js link
   -->
-  <script src="/static/assets/js/script.js"></script>
+  <script src="{% static 'nav-bar.js' %}"></script>
 
   <!-- 
     - ionicon link

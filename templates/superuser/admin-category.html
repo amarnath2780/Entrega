@@ -1,6 +1,7 @@
 {% extends 'index.html' %}
 
 
+{% block title %}Admin{% endblock %}
 
 {% block content %}
 
@@ -214,7 +215,7 @@
                                     </div>
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                      <form action="{% url 'admin-update-category' category.id %}" method="post">
+                                      <form action="{% url 'admin-delete-category' category.id %}" method="post">
                                         {% csrf_token %}
                                         <button type="submit" class="btn btn-danger" >Delete</button>
                                       </form>

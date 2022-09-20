@@ -1,3 +1,4 @@
+from itertools import product
 from django.shortcuts import render,redirect
 from advertisemennt.models import Logo
 from order.models import Order, OrderProduct, Payment
@@ -17,6 +18,8 @@ def offer_update(request , id):
 
     offer = Offers.objects.get(id = id)
     form = Offerform(instance=offer)
+    product = Products.objects.all()
+    category = Category.objects.all()
 
     if request.method == 'POST':
         form  = Offerform(request.POST , instance=offer)
@@ -37,6 +40,8 @@ def offer_update(request , id):
     context = {
         'form' : form,
         'offer' : offer,
+        'product':product,
+        'category' : category,
     }
 
 
@@ -204,7 +209,7 @@ def admin_category_add(request):
             form.save()
             return redirect(admin_category)
         else:
-            messages.error(request , 'Details is not valid please check it!!')
+            messages.error(request , 'Catergory already existed!!')
             print('form is invalid')
             return redirect(admin_category_add)
 
@@ -375,7 +380,8 @@ def admin_product_update(request ,id ):
     form = Productform(instance = products)
     context = {
         'form' : form,
-        'products' : products
+        'products' : products,
+        'product_id': product_id
     }
 
     return render(request , 'superuser/admin-product-update.html', context)

@@ -4,6 +4,7 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'place-order.css' %}">
+{% block title %}Payment{% endblock %}
 
 <section class="section-content padding-y bg" id="payment-banner">
   <div class="container" id="payment-row">
@@ -78,7 +79,7 @@
                               {% else %} -->
                               <var class="price">Rs {{ item.sub_total }}</var>
                               <small class="text-muted"
-                              >Rs {{item.variation.product.price}} each
+                              >Rs {{item.product.price}} each
                             </small>
                               {% endif %}
                           </div> <!-- price-wrap .// -->
@@ -113,7 +114,7 @@
                           <var class="price">Rs {{ cart_item.sub_total }}</var>
                           <br>
                           <small class="text-muted"
-                          >Rs {{cart_item.varient.product.price}} each
+                          >Rs {{cart_item.product.price}} each
                         </small>
                           {% endif %}
                         </div> <!-- price-wrap .// -->
@@ -134,11 +135,11 @@
           <div class="card-body">
             <dl class="dlist-align">
               <dt>Total price:</dt>
-              <dd class="text-right">Rs {{ total }}</dd>
+              <dd class="text-right">USD {{ total }}</dd>
             </dl>
             <dl class="dlist-align">
               <dt>Tax:</dt>
-              <dd class="text-right">Rs {{tax}}</dd>
+              <dd class="text-right">USD {{tax}}</dd>
             </dl>
             <dl class="dlist-align">
               <dt>Discount:</dt>
@@ -151,7 +152,7 @@
             <dl class="dlist-align">
               <dt>Grand Total:</dt>
               <dd class="text-right  b">
-                <strong>Rs {{ grand_total }}</strong>
+                <strong>USD {{ grand_total }}</strong>
               </dd>
             </dl>
             
@@ -279,7 +280,7 @@ var redirect_url = "{% url 'order-complete' %}"
     }
   }).render('#paypal-button-container');
 </script>
-<script src="/static/assets/js/script.js"></script>
+<script src="{% static 'nav-bar.js' %}"></script>
 
 
 

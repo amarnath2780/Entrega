@@ -1,6 +1,7 @@
 {% extends 'index.html' %}
 
 
+{% block title %}Login{% endblock %}
 
 {% block content %}
 
@@ -25,6 +26,16 @@
             <br>
             {% csrf_token %}
             <h1>Sign In</h1>
+
+
+            {% if messages %}     
+                <div class="messages">
+                    {% for message in messages %}
+                    <strong style="color: #ed0e25 ; "> {{message}} </strong>
+                </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
             <div class="input-text">
                 <input type="text" id="inputEmail" name="mobile" placeholder=" phone number" onfocus="inputOnFocus(this)" onblur="inputOnBlur(this)"/>
                 <div class="warning-input" id="warningEmail">
@@ -50,15 +61,7 @@
             {% if messages %}
             <div class="alert alert-danger w-40 mx-auto" role="alert">
               
-            <div class="messages">
-                {% for message in messages %}
-                 <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>        
-                 {{ message }}
-            </div>
-                {% endfor %}
-                </div>
-            </div>
-            {% endif %}
+            
             <div class="remember-flex">
                 <div class="help">
                     <a class="color_text" href="{% url 'forgot_password' %}">Forgot password?</a>

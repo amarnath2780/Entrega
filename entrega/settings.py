@@ -16,6 +16,7 @@ from pathlib import Path
 from smtplib import SMTP
 from django.contrib.messages import constants as messages
 from decouple import config
+from django.contrib.messages import constants as messages
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-)v%_hqk6rsr!xo3l!t0oyqp-gtavi!62^(y*+=%vlfv5o(762d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -65,6 +66,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+MESSAGE_TAGS = {
+    messages.INFO: '',
+    50: 'critical',
+}
 
 ROOT_URLCONF = 'entrega.urls'
 
