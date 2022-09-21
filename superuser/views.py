@@ -11,7 +11,15 @@ from category.models import Category
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
+from django.core.paginator import Paginator
 # Create your views here.
+
+
+
+def admin_logout(request):
+    if request.user.is_authenticated:
+        logout(request)
+        return redirect(admin_login)
 
 
 def offer_update(request , id):
@@ -165,6 +173,10 @@ def admin_update_status(request , id ):
 def admin_order(request):
     order_product = OrderProduct.objects.all()
 
+    p = Paginator(Account.objects.all() , 10)
+    page = request.GET.get('page')
+    paginator = p.get_page(page)
+
     sub_total = 0 
     
     for i in order_product:
@@ -176,7 +188,8 @@ def admin_order(request):
     context = {
         'order_product' : order_product,
         'sub_total'     : sub_total,
-        'logo' :logo
+        'logo' :logo,
+        'paginator':paginator,
 
     }
 
@@ -190,10 +203,17 @@ def admin_order(request):
 @login_required(login_url='admin-login')
 def admin_product_list(request):
     product = Products.objects.all()
+
+    p = Paginator(Account.objects.all() , 10)
+    page = request.GET.get('page')
+    paginator = p.get_page(page)
+
+
+
     logo = Logo.objects.get(name='entrega')
     context = {
         'product' : product,
-        'logo' : logo
+        'paginator' : paginator,
     }
 
     return render(request , 'superuser/admin-product-list.html' , context)
@@ -298,8 +318,14 @@ def admin_user_list(request):
 
     account = Account.objects.all()
 
+    #set up pagination
+    p = Paginator(Account.objects.all() , 10)
+    page = request.GET.get('page')
+    user_list = p.get_page(page)
+
     context = {
-        'account' : account
+        'account' : account,
+        'user_list' : user_list,
     }
 
     return render(request , 'superuser/admin-user-list.html' , context)
@@ -311,6 +337,9 @@ def admin_user_list(request):
 
 @login_required(login_url='admin-login') 
 def admin_home(request):
+
+
+    first_name = request.user.first_name
 
     products = Products.objects.all()
     order = OrderProduct.objects.all()
@@ -330,6 +359,9 @@ def admin_home(request):
     status = ['Ready to Ship' , 'Shipped' , 'Out for Delivery' , 'Delivered' , 'Cancelled'] 
     status_no = [ready , shipped , out , delivered , cancelled]
 
+
+
+
     user = Account.objects.all()
     user_count = user.count()
     print(user_count)
@@ -343,7 +375,7 @@ def admin_home(request):
     order_count = order.count()
 
     print(f"Order count :  {order_count}")
-
+    logo = Logo.objects.get(name='entrega')
     context = {
         'products' : products,
         'order_count' : order_count,
@@ -353,6 +385,8 @@ def admin_home(request):
         'paypal':paypal,
         'status': status,
         'status_no' : status_no,
+        'logo' : logo,
+        'user' :first_name,
 
     }
 
