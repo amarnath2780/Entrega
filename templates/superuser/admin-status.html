@@ -11,7 +11,31 @@
 <div class="container d-flex status">
 <form  method="post" class="status-form">
     {%csrf_token %}
-<h1>{{form.status}}</h1>
+
+<select name="status" id="">
+{% if status.status == 'Ready for Shipping'  %}
+<option value="Shipped">Shipped</option>
+<option value="Out for Delivery">Out for Delivery</option>
+<option value="Delivered">Delivered</option>
+<option value="Cancelled">Cancelled</option>
+{% elif status.status == 'Shipped' %}
+<option value="Out for Delivery">Out for Delivery</option>
+<option value="Delivered">Delivered</option>
+<option value="Cancelled">Cancelled</option>
+{% elif status.status == 'Out for Delivery' %}
+<option value="Delivered">Delivered</option>
+<option value="Cancelled">Cancelled</option>
+{% elif status.status == 'Cancelled' %}
+<option value="Cancelled">Cancelled</option>
+{% else %}
+<option value="Shipped">Ready for Shipping</option>
+<option value="Shipped">Shipped</option>
+<option value="Out for Delivery">Out for Delivery</option>
+<option value="Delivered">Delivered</option>
+<option value="Cancelled">Cancelled</option>
+{% endif %}
+
+</select>
 
 <button type="submit"  class="btn btn-success status-btn" >Update</button>
 

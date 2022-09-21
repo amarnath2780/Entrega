@@ -16,10 +16,6 @@ from django.core.paginator import Paginator
 
 
 
-def admin_logout(request):
-    if request.user.is_authenticated:
-        logout(request)
-        return redirect(admin_login)
 
 
 def offer_update(request , id):
@@ -45,11 +41,16 @@ def offer_update(request , id):
         print('Form is not valid')
         messages.error(request, 'Details is not valid please check it!!!')
 
+    logo = Logo.objects.get(name='entrega')
+    first_name = request.user.first_name
+
     context = {
         'form' : form,
         'offer' : offer,
         'product':product,
         'category' : category,
+        'logo' : logo,
+        'first_name' : first_name,
     }
 
 
@@ -82,11 +83,16 @@ def offer_add(request):
     logo = Logo.objects.get(name='entrega')
     category = Category.objects.all()
     product = Products.objects.all()
+
+    logo = Logo.objects.get(name='entrega')
+    first_name = request.user.first_name
+
     context = {
         'form' : form,
         'category' : category,
         'product' : product,
-        'logo':logo,
+        'logo' : logo,
+        'first_name' : first_name,
     }
     return render(request , 'superuser/admin-offer-add.html' , context)
 
@@ -114,9 +120,14 @@ def offer(request):
 
     offer = Offers.objects.all()
     logo = Logo.objects.get(name='entrega')
+
+    logo = Logo.objects.get(name='entrega')
+    first_name = request.user.first_name
+
     context = {
         'offer' : offer,
-        'logo':logo,
+        'logo' : logo,
+        'first_name' : first_name,
     }
 
 
@@ -133,6 +144,8 @@ def admin_update_status(request , id ):
     order_id = id
 
     print(order_id)
+
+    
 
     status = Order.objects.get(order_number = order_id)
 
@@ -159,10 +172,13 @@ def admin_update_status(request , id ):
         messages.error(request , 'Details is not valid please check it!!')
 
     logo = Logo.objects.get(name='entrega')
+    first_name = request.user.first_name
+
     context = {
         'form' : form,
         'status': status,
-        'logo':logo,
+        'logo' : logo,
+        'first_name' : first_name,
     }
 
     return render(request , 'superuser/admin-status.html' ,context)
@@ -172,6 +188,7 @@ def admin_update_status(request , id ):
 @login_required(login_url='admin-login')
 def admin_order(request):
     order_product = OrderProduct.objects.all()
+    status = Order.objects.all()
 
     p = Paginator(Account.objects.all() , 10)
     page = request.GET.get('page')
@@ -185,11 +202,15 @@ def admin_order(request):
     
 
     logo = Logo.objects.get(name='entrega')
+    first_name = request.user.first_name
+
     context = {
         'order_product' : order_product,
         'sub_total'     : sub_total,
-        'logo' :logo,
+        'logo' : logo,
+        'first_name' : first_name,
         'paginator':paginator,
+        'status' : status,
 
     }
 
@@ -211,9 +232,13 @@ def admin_product_list(request):
 
 
     logo = Logo.objects.get(name='entrega')
+    first_name = request.user.first_name
+
     context = {
         'product' : product,
         'paginator' : paginator,
+        'logo' : logo,
+        'first_name' : first_name,
     }
 
     return render(request , 'superuser/admin-product-list.html' , context)
@@ -236,9 +261,14 @@ def admin_category_add(request):
     form = CategoryForm()
     category = Category.objects.all()
     
+    logo = Logo.objects.get(name='entrega')
+    first_name = request.user.first_name
+
     context = {
         'form' : form,
-        'category': category
+        'category': category,
+        'logo' : logo,
+        'first_name' : first_name,
     }
 
 
@@ -275,10 +305,15 @@ def admin_category_update(request , id):
         else:
             print('Form is Invalid')
             messages.error(request , 'Details is not valid please check it!!')
-    
+
+    logo = Logo.objects.get(name='entrega')
+    first_name = request.user.first_name
+
     context = {
         'form' : form,
-        'category' : category
+        'category' : category,
+        'logo' : logo,
+        'first_name' : first_name,
     }
     return render(request , 'superuser/admin-category-update.html' , context)
 
@@ -289,8 +324,13 @@ def admin_category(request):
 
     category = Category.objects.all()
 
+    logo = Logo.objects.get(name='entrega')
+    first_name = request.user.first_name
+
     context = {
-        'category' : category
+        'category' : category,
+        'logo' : logo,
+        'first_name' : first_name,
     }
 
     return render(request , 'superuser/admin-category.html' , context)
@@ -323,9 +363,14 @@ def admin_user_list(request):
     page = request.GET.get('page')
     user_list = p.get_page(page)
 
+    logo = Logo.objects.get(name='entrega')
+    first_name = request.user.first_name
+
     context = {
         'account' : account,
         'user_list' : user_list,
+        'logo' : logo,
+        'first_name' : first_name,
     }
 
     return render(request , 'superuser/admin-user-list.html' , context)
@@ -376,6 +421,7 @@ def admin_home(request):
 
     print(f"Order count :  {order_count}")
     logo = Logo.objects.get(name='entrega')
+    first_name = request.user.first_name
     context = {
         'products' : products,
         'order_count' : order_count,
@@ -412,10 +458,14 @@ def admin_product_update(request ,id ):
             messages.error(request, 'Details is not valid please check it!!')
             return redirect(admin_product_update)
     form = Productform(instance = products)
+    logo = Logo.objects.get(name='entrega')
+    first_name = request.user.first_name
     context = {
         'form' : form,
         'products' : products,
-        'product_id': product_id
+        'product_id': product_id,
+        'logo' : logo,
+        'first_name' : first_name,
     }
 
     return render(request , 'superuser/admin-product-update.html', context)
@@ -452,9 +502,15 @@ def admin_product(request):
             return redirect(admin_product)
     else:
         form = Productform()
-        context = {
-            'form' : form
-        }
+
+    logo = Logo.objects.get(name='entrega')
+    first_name = request.user.first_name
+
+    context = {
+        'form' : form,
+        'logo' : logo,
+        'first_name' : first_name,
+    }
 
     return render(request , 'superuser/admin-product.html' , context)
 
@@ -485,8 +541,10 @@ def admin_login(request):
 
 
 def admin_logout(request):
-    logout(request )
-    return redirect(admin_login)
+    
+    if request.user.is_authenticated:
+        logout(request )
+        return redirect(admin_login)
 
 
 
