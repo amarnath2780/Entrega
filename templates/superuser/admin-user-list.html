@@ -58,6 +58,7 @@ link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min
                         
                         {% for account in account %}
                           {% if not account.is_admin %}
+                          {% if account.is_verified %}
                           <tr>
                             <td> {{account.id}} </td>
                             <td> {{account.first_name}} </td>
@@ -133,6 +134,7 @@ link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min
                             {% endif %}
                             {% endif %}
                           </tr>
+                          {% endif  %}
                           {% endif %}
                         {% endfor  %}
 

@@ -15,15 +15,7 @@
       <!-- partial:../../partials/_navbar.html -->
       
       <!-- partial -->
-                {% if messages %}     
-                <div class="messages">
-                    {% for message in messages %}
-                    <strong style="color: #ed0e25 ; "> {{message}} </strong>
-                </div>
-                    {% endfor %}
-                </div>
-                {% endif %}
-
+                
                 <div class="row" style="width: 100%;">
                     <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="row">
@@ -32,6 +24,15 @@
                                     <div class="card-header">
                                         <h4 class="mb-0">Add Product</h4>
                                     </div>
+                                    {% if messages %}     
+                                        <div class="messages">
+                                            {% for message in messages %}
+                                            <strong style="color: #ed0e25 ; "> {{message}} </strong>
+                                        </div>
+                                            {% endfor %}
+                                        </div>
+                                        {% endif %}
+
                                     <div class="card-body">
                                         <form method="POST" enctype="multipart/form-data" id="registration_form">
                                             {% csrf_token %}
