@@ -20,149 +20,95 @@
   ">
     
 
+    
+
 <header class="header">
 
-  <!-- 
-    - overlay
-  -->
-  <div class="overlay" data-overlay></div>
-
-  <div class="container">
-
-    <div class="logo">
-      <a href="#" > 
-        <img src="{{logo.image.url}}">
-      </a>
-    </div>
-
-    <button class="nav-open-btn" data-nav-open-btn>
-      <ion-icon name="menu-outline"></ion-icon>
-    </button>
-
-    <nav class="navbar" data-nav>
-
-      <div class="navbar-top">
-
-        <div class="logo">
-          <a href="#" >
-            <img src="{{logo.image.url}}">
-          </a>
+  <nav class="navbar navbar-expand-lg navbar-dark position-fixed " style="background: hsl(234, 14%, 14%); width: 100%; z-index: 3;">
+	
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </button>
+      <div class="collapse  navbar-collapse  justify-content-between" id="navbarNav">
+        <div class="cart-content-in">
+          <a class="navbar-brand "  href="#"><img  style="width: 10rem;"src="{{logo.image.url}}"></a>
         </div>
-
-
-        <button class="nav-close-btn" data-nav-close-btn>
-          <ion-icon name="close-outline"></ion-icon>
-        </button>
-
-      </div>
-
-      <ul class="navbar-list">
-
-        <li>
-          <a href="{% url 'home_user' %}" class="navbar-link">Home</a>
+        <ul class="navbar-nav" style="gap: 3rem;">
+        <li class="nav-item ">
+          <a class="nav-link navbar-link" href="{% url 'home_user' %}">Home</a>
         </li>
-        {% if user.id is None %}
-        <li>
-          <a href="{% url 'signup_user' %}" class="navbar-link">Signup</a>
+        {% if user is None %}
+          <li class="nav-item active">
+            <a href="{% url 'signup_user' %}" class="nav-link navbar-link" >Signup</a>
+          </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link navbar-link " href="{% url 'store' %}">Store</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link navbar-link" href="{% url 'cart' %}">Cart</a>
+        </li>
+
+        {% if user.id is not None %}
+        <li class="nav-item">
+          <div class="header-actions navbar-link">
+      
+                <div class="col-lg col-sm col-md col-6 flex-grow-0">
+                  <div class="category-wrap dropdown d-inline-block float-right">
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"> 
+                      <i class="fa fa-user" aria-hidden="true"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'user_address' %}">User Address</a>
+                      <a class="dropdown-item" href="{% url 'order-list' %}">My Orders</a>
+                      <a class="dropdown-item" href="{% url 'change-password' %}">Change Password</a>
+                    </div>
+                  </div> 
+                </div>
+            
+          </div>
+      
         </li>
         {% endif %}
-
-        <li>
-          <a href="{% url 'store' %}" class="navbar-link">Store</a>
-        </li>
-
-        <li>
-          
-          <a href="{% url 'cart' %}" class="navbar-link">Cart</a>
-          
-          </li>
-
         
-
+        {% if user.id is None %}
+        <li class="nav-item navbar-link">
         
-
-      </ul>
-
-      <ul class="nav-social-list">
-
-        <li>
-          <a href="#" class="social-link">
-            <ion-icon name="logo-twitter"></ion-icon>
-          </a>
-        </li>
-
-        <li>
-          <a href="#" class="social-link">
-            <ion-icon name="logo-instagram"></ion-icon>
-          </a>
-        </li>
-
-        <li>
-          <a href="#" class="social-link">
-            <ion-icon name="logo-github"></ion-icon>
-          </a>
-        </li>
-
-        <li>
-          <a href="#" class="social-link">
-            <ion-icon name="logo-youtube"></ion-icon>
-          </a>
-        </li>
-
-      </ul>
-
-    </nav>
-    {% if user.id is None %}
-    <div class="header-actions">
-
+              
+            <a href="{% url 'login' %}">
+              <button class="btn-sign_in">
       
-
-      <a href="{% url 'login' %}">
-        <button class="btn-sign_in">
-
-          <div class="icon-box">
-            <ion-icon name="log-in-outline"></ion-icon>
-          </div>
-
-          <span>Login</span>
-
-        </button>
-      </a>
-    </div>
-    {% else %}
-    <div class="header-actions">
-
-          <div class="col-lg col-sm col-md col-6 flex-grow-0">
-            <div class="category-wrap dropdown d-inline-block float-right">
-              <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"> 
-                <i class="fa fa-user" aria-hidden="true"></i>
+                <div class="icon-box">
+                  <ion-icon name="log-in-outline"></ion-icon>
+                </div>
+      
+                <span>Login</span>
+      
               </button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="{% url 'user_address' %}">User Address</a>
-                <a class="dropdown-item" href="{% url 'order-list' %}">My Orders</a>
-                <a class="dropdown-item" href="{% url 'change-password' %}">Change Password</a>
+            </a>
+        </li>
+         {% else %}
+         <li class="nav-item navbar-link">
+          <a href="{% url 'logout_user' %}">
+            <button class="btn-sign_in">
+    
+              <div class="icon-box">
+                <ion-icon name="log-in-outline"></ion-icon>
               </div>
-            </div>  <!-- category-wrap.// -->
-          </div>
+    
+              <span>Logout</span>
+    
+            </button>
+          </a>
+       </li>
+       {% endif %}
+        
+        
+        </ul>
+      </div>
+  </nav>
 
-      <a href="{% url 'logout_user' %}">
-        <button class="btn-sign_in">
-
-          <div class="icon-box">
-            <ion-icon name="log-in-outline"></ion-icon>
-          </div>
-
-          <span>Logout</span>
-
-        </button>
-      </a>
-    </div>
-
-    {% endif %}
-
-  </div>
-
-</header>
+</header> 
 
     {% block content%}
 

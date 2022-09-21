@@ -1,16 +1,65 @@
 {% extends 'index.html' %}
 
+{% block title %}Store{% endblock %}
 
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'home.css' %}">
-{% block title %}Store{% endblock %}
 
-<header class="header">
 
-  <!-- 
-    - overlay
-  -->
+
+<nav class="navbar navbar-expand-lg navbar-dark position-fixed " style="background: hsl(234, 14%, 14%); width: 100%; z-index: 3;">
+	
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fa fa-bars" aria-hidden="true"></i>
+  </button>
+  <div class="collapse  navbar-collapse  justify-content-between" id="navbarNav">
+    <div class="cart-content-in">
+      <a class="navbar-brand "  href="#"><img  style="width: 10rem;"src="{{logo.image.url}}"></a>
+    </div>
+    <ul class="navbar-nav" style="gap: 3rem;">
+    <li class="nav-item ">
+      <a class="nav-link navbar-link" href="{% url 'home_user' %}">Home</a>
+    </li>
+    {% if user is None %}
+      <li class="nav-item active">
+        <a href="{% url 'signup_user' %}" class="nav-link navbar-link" >Signup</a>
+      </li>
+    {% endif %}
+    <li class="nav-item">
+      <a class="nav-link navbar-link " href="{% url 'store' %}">Store</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link navbar-link" href="{% url 'cart' %}">Cart</a>
+    </li>
+    <li class="nav-item">
+      <div class="col-lg col-sm col-md col-6 flex-grow-0 navbar-link">
+        <div class="category-wrap dropdown d-inline-block float-right">
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> 
+             All category 
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'store' %}">All Products</a>
+            {% for category in links %}
+            <a class="dropdown-item" href="{{category.get_url}}">{{category.category_name}}</a>
+            {% endfor %}
+          </div>
+        </div>  
+      </div>
+    </li>
+    
+    
+    </ul>
+  </div>
+</nav>
+
+
+
+
+
+
+<!-- <header class="header">
+
   <div class="overlay" data-overlay></div>
 
   <div class="container">
@@ -59,21 +108,7 @@
           
         </li>
 
-        <li>
-          <div class="col-lg col-sm col-md col-6 flex-grow-0">
-            <div class="category-wrap dropdown d-inline-block float-right">
-              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> 
-                 All category 
-              </button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="{% url 'store' %}">All Products</a>
-                {% for category in links %}
-                <a class="dropdown-item" href="{{category.get_url}}">{{category.category_name}}</a>
-                {% endfor %}
-              </div>
-            </div>  <!-- category-wrap.// -->
-          </div>
-        </li>
+        
 
         
 
@@ -155,7 +190,7 @@
 
   </div>
 
-</header>
+</header> -->
 
 
 
