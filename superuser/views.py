@@ -1,5 +1,5 @@
 from itertools import product
-from django.shortcuts import render,redirect
+from django.shortcuts import render,get_object_or_404,redirect
 from advertisemennt.models import Logo
 from order.models import Order, OrderProduct, Payment
 from store.models import Offers, Products
@@ -222,12 +222,24 @@ def admin_order(request):
 
 
 @login_required(login_url='admin-login')
-def admin_product_list(request):
-    product = Products.objects.all()
+def admin_product_list(request , category_slug=None):
+    
+    categories = None
+    products = None
+    
 
-    p = Paginator(Account.objects.all() , 10)
-    page = request.GET.get('page')
-    paginator = p.get_page(page)
+    if category_slug != None:
+        categories = get_object_or_404(Category , slug = category_slug)
+        products = Products.objects.filter(category = categories , is_available = True)
+        page = request.GET.get('page')
+        paginator = Paginator(products , 1)
+        paged_product = paginator.get_page(page)
+    else:
+        products = Products.objects.all().filter(is_available = True).order_by('id')
+        page = request.GET.get('page')
+        paginator = Paginator(products , 10)
+        paged_product = paginator.get_page(page)
+
 
 
 
@@ -235,8 +247,7 @@ def admin_product_list(request):
     first_name = request.user.first_name
 
     context = {
-        'product' : product,
-        'paginator' : paginator,
+        'product' : paged_product,
         'logo' : logo,
         'first_name' : first_name,
     }
@@ -320,15 +331,29 @@ def admin_category_update(request , id):
 
 
 @login_required(login_url='admin-login')
-def admin_category(request):
+def admin_category(request , category_slug=None):
 
-    category = Category.objects.all()
+
+    categories = None
+    
+
+    if category_slug != None:
+        categories = get_object_or_404(Category , slug = category_slug)
+        category = Category.objects.filter(category = categories , is_available = True)
+        page = request.GET.get('page')
+        paginator = Paginator(category , 1)
+        paged_product = paginator.get_page(page)
+    else:
+        category = Category.objects.all().order_by('id')
+        page = request.GET.get('page')
+        paginator = Paginator(category , 15)
+        paged_product = paginator.get_page(page)
 
     logo = Logo.objects.get(name='entrega')
     first_name = request.user.first_name
 
     context = {
-        'category' : category,
+        'category' : paged_product,
         'logo' : logo,
         'first_name' : first_name,
     }
@@ -354,21 +379,31 @@ def admin_user_block(request , id):
 
 
 @login_required(login_url='admin-login')
-def admin_user_list(request):
+def admin_user_list(request , category_slug=None):
 
-    account = Account.objects.all()
+    
 
     #set up pagination
-    p = Paginator(Account.objects.all() , 10)
-    page = request.GET.get('page')
-    user_list = p.get_page(page)
+    categories = None
+    
+
+    if category_slug != None:
+        categories = get_object_or_404(Category , slug = category_slug)
+        category = Account.objects.filter(category = categories , is_available = True)
+        page = request.GET.get('page')
+        paginator = Paginator(category , 1)
+        paged_product = paginator.get_page(page)
+    else:
+        account = Account.objects.all().order_by('id')
+        page = request.GET.get('page')
+        paginator = Paginator(account , 15)
+        paged_product = paginator.get_page(page)
 
     logo = Logo.objects.get(name='entrega')
     first_name = request.user.first_name
 
     context = {
-        'account' : account,
-        'user_list' : user_list,
+        'account' : paged_product,
         'logo' : logo,
         'first_name' : first_name,
     }

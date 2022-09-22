@@ -96,53 +96,42 @@
                       </table>
                     </div>
 
-                    {% if paginator.has_other_pages %}
-                    <div class="pt-5">
-                    <nav aria-label="..." >
-                      <ul class="pagination" style="justify-content: center;">
-                       {% if paginator.has_previous %}
+                  {% if product.has_other_pages %}
+                    <div>
+                    <nav aria-label="...">
+                      <ul class="pagination pt-4" style="justify-content: center;">
+                        {%  if product.has_previous %}
                         <li class="page-item ">
-                          <a class="page-link" href="?page={{ paginator.previous_page_number }}" >Previous</a>
+                          <a class="page-link" href="?page={{product.previous_page_number}}">Previous</a>
                         </li>
                         {% else %}
-                          <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1">Previous</a>
-                          </li>
+                        <li class="page-item disabled">
+                          <a class="page-link" href="#" tabindex="-1">Previous</a>
+                        </li>
                         {% endif %}
-                        {% for i in paginator.paginator.page_range %}
-                        {% if paginator.number == i %}
-                        <li>
-                        <a class="page-links" href="#">
-                          <div class="pagination:number">
-                           {{i}}
-                          </div>
-                        </a>
-                        </li>
+                        {% for i in product.paginator.page_range %}
+                        {% if product.number == i %}
+                        <li class="page-item active"><a class="page-link" href="">{{i}}</a></li>
                         {% else %}
-                        <li>
-                          <a class="page-links" href="?page={{i}}">
-                            <div class="pagination:number">
-                             {{i}}
-                            </div>
-                          </a>
-                          </li>
+                        <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
                         {% endif %}
                         {% endfor %}
-                        {% if paginator.has_next %}
+                        
+                        {% if product.has_next %}
                         <li class="page-item">
-                          <a class="page-link" href="?page={{ paginator.next_page_number }}">Next</a>
+                          <a class="page-link" href="?page={{product.next_page_number}}">Next</a>
                         </li>
                         {% else %}
-                        <li class="page-item">
-                          <a class="page-link" href="">Next</a>
+                        <li class="page-item disabled">
+                          <a class="page-link" href="#">Next</a>
                         </li>
                         {% endif %}
                       </ul>
                     </nav>
-                    </div>
-
-                    {% endif %}
-
+                  </div>
+                  {% endif %}
+                 
+                    
                     
                   </div>
                   
