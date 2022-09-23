@@ -1,4 +1,5 @@
 from math import prod
+from unicodedata import name
 from django.shortcuts import render , redirect,get_object_or_404
 from accounts.models import Offer
 from cart.forms import AddressForm
@@ -8,7 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from advertisemennt.models import Logo
+from advertisemennt.models import Logo, Wrapper
 
 # Create your views here.
 
@@ -259,6 +260,7 @@ def carts(request, total=0, cart_items=None, quantity=0):
     sub_total = round(float(total)+tax_amount, 2)
     logo = Logo.objects.get(name = 'entrega')
     cartempty = CartEmpty.objects.get(name = 'cart')
+    wrapper = Wrapper.objects.get(name='wrapper')
     context = {
         'total':total ,
         'quantity': quantity ,
@@ -267,6 +269,7 @@ def carts(request, total=0, cart_items=None, quantity=0):
         'sub_total' : sub_total ,
         'logo' :logo,
         'cartempty' : cartempty,
+        'wrapper' : wrapper,
     }
     return render(request, 'store/cart.html', context)  
 

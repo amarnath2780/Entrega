@@ -24,3 +24,6 @@ class Logo(models.Model):
     name = models.CharField(max_length=20 , blank=True)
     image = models.ImageField(upload_to = 'images/logo')
 
+class Wrapper(models.Model):
+    name = models.CharField(max_length=200, blank=True)
+    image = models.ImageField(upload_to = 'images/wrapper')

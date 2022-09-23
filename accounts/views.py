@@ -3,7 +3,7 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from cart.models import AddressUser, Cart, CartItem
-from advertisemennt.models import Add, IconAdd, Logo
+from advertisemennt.models import Add, IconAdd, Logo, Wrapper
 from .forms import AddAdddressForm, RegistrationForm
 from .models import Account, Offer, Turno
 from django.contrib import messages
@@ -75,9 +75,12 @@ def user_address(request):
             return redirect('user_address')
     address = AddressUser.objects.filter(user = request.user)
     form = AddAdddressForm()
+    wrapper = Wrapper.objects.get(name='wrapper')
     context = {
         'form':form,
-        'address':address
+        'address':address,
+        'wrapper' : wrapper,
+        
     }
 
     return render(request,'authentication/address.html',context)
@@ -156,8 +159,16 @@ def userotp(request):
                 messages.error(request,'otp entered is incorrect!')
     except:
         messages.error(request,'try again!')
-        return redirect(userotp)            
-    return render(request, 'authentication/otp.html')
+        return redirect(userotp)       
+
+    logo = Logo.objects.get(name='entrega')
+    wrapper = Wrapper.objects.get(name='wrapper')
+
+    context = {
+        'logo' : logo,
+        'wrapper':wrapper,
+    }     
+    return render(request, 'authentication/otp.html' , context)
 
 
 

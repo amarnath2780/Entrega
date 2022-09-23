@@ -1,4 +1,4 @@
-{% extends 'index.html' %}
+{% extends 'nav.html' %}
 {% load static %}
 
 
@@ -9,27 +9,15 @@
   }
   </style>
   <link href="https://fonts.cdnfonts.com/css/bukhari-script" rel="stylesheet">
-<nav class="navbar navbar-expand-lg navbar-light " style="background: #90CAF9;" >
-  <a class="navbar-brand text-white ms-3 fs-3 "  style="font-family:Bukhari Script" href="#">HireYourMentor.com</a>
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ms-auto">
-      <li class="nav-item ">
-        <a class="nav-link " href="{% url 'login' %}">Login</a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link " href="{% url 'signup_user' %}">Sign up</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+<div style="
+    display: flex;
+    justify-content: center;
+    padding-top: 15%;">
 <section class="vh-100">
   <div class="container py-5 h-100">
     <div class="row d-flex align-items-center justify-content-center h-100">
       <div class="col-md-8 col-lg-7 col-xl-6">
-        <img class="img-fluid" src="{% static 'images/pana.png' %}"  alt="cuate" >
+        <img class="img-fluid" src="{{ logo.image.url }}"  alt="cuate" >
       </div>
       <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 border"  style="border-radius: 1rem;" >
         <form method="POST" action="{% url 'user_otp' %}" >
@@ -47,4 +35,5 @@
     </div>
   </div>
 </section>
+</div>
 {% endblock %}
