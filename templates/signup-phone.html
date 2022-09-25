@@ -1,10 +1,10 @@
 {% extends 'index.html' %}
+{% block title %}Signup{% endblock %}
 
 {% block content  %}
 
 {% load static %}
 <link rel="stylesheet" href="{% static 'signup.css' %}">
-{% block title %}Signup{% endblock %}
 
 
 <div class="upper">
@@ -66,19 +66,6 @@
                 {{form.confirm_password.label}}
                 
             </div>
-            
-            {% if messages %}
-            <div class="alert alert-danger w-40 mx-auto" role="alert">
-              
-            <div class="messages">
-                {% for message in messages %}
-                 <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>        
-                 {{ message }}
-            </div>
-                {% endfor %}
-                </div>
-            </div>
-            {% endif %}
             <div>
                 <button type="submit" class="signin-button">Sign Up
                     
