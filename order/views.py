@@ -157,19 +157,10 @@ def payments(request):
     #Clear cart 
     CartItem.objects.filter(user = request.user).delete()
 
-
-    #send order recieved email to the customer
-    email_subject   = 'Thank you for your order'
-    email_body      = render_to_string('order/order_recieved_email.html',{
-    'user': request.user,
-    'order' : order,
-    })
-    to_email = request.user.email
-    email = EmailMessage(  
-            email_subject, email_body, to=[to_email]  
-    )
+    print('cart item deleted')
+   
     
-    email.send() 
+
     print('email sent') 
         
 
@@ -396,7 +387,7 @@ def place_order(request , total=0, quantity=0):
 
 
 
-    return
+
 
 
 
